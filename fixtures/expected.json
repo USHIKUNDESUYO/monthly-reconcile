@@ -1,0 +1,1607 @@
+{
+  "schema_version": "1.0",
+  "synthetic_only": true,
+  "not_a_customer_result": true,
+  "rows": [
+    {
+      "side": "ledger",
+      "row_id": "L001",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N001"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V001",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N001"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L002",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N002"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V002",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N002"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L003",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N003"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V003",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N003"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L004",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N004"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V004",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N004"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L005",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N005"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V005",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N005"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L006",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N006"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V006",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N006"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L007",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N007"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V007",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N007"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L008",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N008"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V008",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N008"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L009",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N009"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V009",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N009"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L010",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N010"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V010",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N010"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L011",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N011"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V011",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N011"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L012",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N012"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V012",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N012"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L013",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N013"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V013",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N013"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L014",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N014"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V014",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N014"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L015",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N015"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V015",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N015"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L016",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N016"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V016",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N016"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L017",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N017"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V017",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N017"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L018",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N018"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V018",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N018"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L019",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N019"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V019",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N019"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L020",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N020"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V020",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N020"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L021",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N021"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V021",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N021"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L022",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N022"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V022",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N022"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L023",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N023"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V023",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N023"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L024",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N024"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V024",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N024"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L025",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N025"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V025",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N025"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L026",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N026"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V026",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N026"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L027",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N027"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V027",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N027"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L028",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N028"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V028",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N028"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L029",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N029"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V029",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N029"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L030",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N030"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V030",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N030"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L031",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N031"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V031",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N031"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L032",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N032"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V032",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N032"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L033",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N033"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V033",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N033"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L034",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N034"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V034",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N034"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L035",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N035"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V035",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N035"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L036",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N036"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V036",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N036"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L037",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N037"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V037",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N037"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L038",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N038"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V038",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N038"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L039",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N039"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V039",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N039"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L040",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N040"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V040",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N040"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L041",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N041"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V041",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N041"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L042",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N042"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V042",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N042"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L043",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N043"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V043",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N043"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L044",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N044"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V044",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N044"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L045",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N045"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V045",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N045"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L046",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N046"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V046",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N046"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L047",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N047"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V047",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N047"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L048",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N048"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V048",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N048"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L049",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N049"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V049",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N049"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L050",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N050"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V050",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N050"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L051",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N051"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V051",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N051"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L052",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N052"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V052",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N052"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L053",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N053"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V053",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N053"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L054",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N054"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V054",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N054"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L055",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N055"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V055",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N055"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L056",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N056"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V056",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N056"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L057",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N057"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V057",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N057"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L058",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N058"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V058",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N058"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L059",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N059"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V059",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N059"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L060",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N060"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V060",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N060"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L061",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N061"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V061",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N061"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L062",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N062"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V062",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N062"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L063",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N063"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V063",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N063"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L064",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N064"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V064",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N064"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L065",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N065"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V065",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N065"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L066",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N066"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V066",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N066"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L067",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N067"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V067",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N067"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L068",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N068"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V068",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N068"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L069",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N069"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V069",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N069"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L070",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N070"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V070",
+      "case": "unique_exact",
+      "classification": "auto_map_candidate",
+      "reason": "same date, gross amount, party, unique counterpart",
+      "pair_key": "N070"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L071",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C001"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V071",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C001"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L072",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C002"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V072",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C002"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L073",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C003"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V073",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C003"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L074",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C004"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V074",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C004"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L075",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C005"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V075",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C005"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L076",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C006"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V076",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C006"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L077",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C007"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V077",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C007"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L078",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C008"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V078",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C008"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L079",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C009"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V079",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C009"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L080",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C010"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V080",
+      "case": "corporate_name_notation",
+      "classification": "auto_map_candidate",
+      "reason": "known synthetic identity, notation only",
+      "pair_key": "C010"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L081",
+      "case": "different_party",
+      "classification": "review_required",
+      "reason": "counterparty differs",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V081",
+      "case": "different_party",
+      "classification": "review_required",
+      "reason": "counterparty differs",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L082",
+      "case": "different_party",
+      "classification": "review_required",
+      "reason": "counterparty differs",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V082",
+      "case": "different_party",
+      "classification": "review_required",
+      "reason": "counterparty differs",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L083",
+      "case": "different_party",
+      "classification": "review_required",
+      "reason": "counterparty differs",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V083",
+      "case": "different_party",
+      "classification": "review_required",
+      "reason": "counterparty differs",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L084",
+      "case": "missing_date",
+      "classification": "review_required",
+      "reason": "required date absent",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V084",
+      "case": "missing_date",
+      "classification": "review_required",
+      "reason": "required date absent",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L085",
+      "case": "missing_date",
+      "classification": "review_required",
+      "reason": "required date absent",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V085",
+      "case": "missing_date",
+      "classification": "review_required",
+      "reason": "required date absent",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L086",
+      "case": "invalid_date",
+      "classification": "review_required",
+      "reason": "invalid calendar date must not roll over silently",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V086",
+      "case": "invalid_date",
+      "classification": "review_required",
+      "reason": "invalid calendar date must not roll over silently",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L087",
+      "case": "missing_party",
+      "classification": "review_required",
+      "reason": "required party absent",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V087",
+      "case": "missing_party",
+      "classification": "review_required",
+      "reason": "required party absent",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L088",
+      "case": "missing_amount",
+      "classification": "review_required",
+      "reason": "required amount absent, not zero",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V088",
+      "case": "missing_amount",
+      "classification": "review_required",
+      "reason": "required amount absent, not zero",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L089",
+      "case": "duplicate_candidates",
+      "classification": "review_required",
+      "reason": "two counterparts on both sides; no unique assignment",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V089",
+      "case": "duplicate_candidates",
+      "classification": "review_required",
+      "reason": "two counterparts on both sides; no unique assignment",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L090",
+      "case": "duplicate_candidates",
+      "classification": "review_required",
+      "reason": "two counterparts on both sides; no unique assignment",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V090",
+      "case": "duplicate_candidates",
+      "classification": "review_required",
+      "reason": "two counterparts on both sides; no unique assignment",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L091",
+      "case": "outside_date_window",
+      "classification": "review_required",
+      "reason": "dates differ",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V091",
+      "case": "outside_date_window",
+      "classification": "review_required",
+      "reason": "dates differ",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L092",
+      "case": "outside_date_window",
+      "classification": "review_required",
+      "reason": "dates differ",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V092",
+      "case": "outside_date_window",
+      "classification": "review_required",
+      "reason": "dates differ",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L093",
+      "case": "amount_difference",
+      "classification": "review_required",
+      "reason": "gross amounts differ",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V093",
+      "case": "amount_difference",
+      "classification": "review_required",
+      "reason": "gross amounts differ",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L094",
+      "case": "amount_difference",
+      "classification": "review_required",
+      "reason": "gross amounts differ",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V094",
+      "case": "amount_difference",
+      "classification": "review_required",
+      "reason": "gross amounts differ",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L095",
+      "case": "missing_invoice",
+      "classification": "unmatched",
+      "reason": "no invoice record",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V095",
+      "case": "missing_ledger",
+      "classification": "unmatched",
+      "reason": "no ledger record",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L096",
+      "case": "refund",
+      "classification": "review_required",
+      "reason": "refund outside initial automatic mapping scope",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V096",
+      "case": "refund",
+      "classification": "review_required",
+      "reason": "refund outside initial automatic mapping scope",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L097",
+      "case": "refund",
+      "classification": "review_required",
+      "reason": "refund outside initial automatic mapping scope",
+      "pair_key": null
+    },
+    {
+      "side": "invoices",
+      "row_id": "V097",
+      "case": "refund",
+      "classification": "review_required",
+      "reason": "refund outside initial automatic mapping scope",
+      "pair_key": null
+    },
+    {
+      "side": "ledger",
+      "row_id": "L098",
+      "case": "one_to_many",
+      "classification": "review_required",
+      "reason": "grouping requires review",
+      "pair_key": "G1"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V098",
+      "case": "one_to_many",
+      "classification": "review_required",
+      "reason": "grouping requires review",
+      "pair_key": "G1"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V099",
+      "case": "one_to_many",
+      "classification": "review_required",
+      "reason": "grouping requires review",
+      "pair_key": "G1"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L099",
+      "case": "many_to_one",
+      "classification": "review_required",
+      "reason": "grouping requires review",
+      "pair_key": "G2"
+    },
+    {
+      "side": "ledger",
+      "row_id": "L100",
+      "case": "many_to_one",
+      "classification": "review_required",
+      "reason": "grouping requires review",
+      "pair_key": "G2"
+    },
+    {
+      "side": "invoices",
+      "row_id": "V100",
+      "case": "many_to_one",
+      "classification": "review_required",
+      "reason": "grouping requires review",
+      "pair_key": "G2"
+    }
+  ]
+}

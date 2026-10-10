@@ -1,0 +1,101 @@
+row_id,invoice_date,party,gross_amount_jpy,source_file,source_row
+V001,2026-09-01,架空取引先001,10000,invoices-standard.csv,2
+V002,2026-09-02,架空取引先002,10037,invoices-standard.csv,3
+V003,2026-09-03,架空取引先003,10074,invoices-standard.csv,4
+V004,2026-09-04,架空取引先004,10111,invoices-standard.csv,5
+V005,2026-09-05,架空取引先005,10148,invoices-standard.csv,6
+V006,2026-09-06,架空取引先006,10185,invoices-standard.csv,7
+V007,2026-09-07,架空取引先007,10222,invoices-standard.csv,8
+V008,2026-09-08,架空取引先008,10259,invoices-standard.csv,9
+V009,2026-09-09,架空取引先009,10296,invoices-standard.csv,10
+V010,2026-09-10,架空取引先010,10333,invoices-standard.csv,11
+V011,2026-09-11,架空取引先011,10370,invoices-standard.csv,12
+V012,2026-09-12,架空取引先012,10407,invoices-standard.csv,13
+V013,2026-09-13,架空取引先013,10444,invoices-standard.csv,14
+V014,2026-09-14,架空取引先014,10481,invoices-standard.csv,15
+V015,2026-09-15,架空取引先015,10518,invoices-standard.csv,16
+V016,2026-09-16,架空取引先016,10555,invoices-standard.csv,17
+V017,2026-09-17,架空取引先017,10592,invoices-standard.csv,18
+V018,2026-09-18,架空取引先018,10629,invoices-standard.csv,19
+V019,2026-09-19,架空取引先019,10666,invoices-standard.csv,20
+V020,2026-09-20,架空取引先020,10703,invoices-standard.csv,21
+V021,2026-09-21,架空取引先021,10740,invoices-standard.csv,22
+V022,2026-09-22,架空取引先022,10777,invoices-standard.csv,23
+V023,2026-09-23,架空取引先023,10814,invoices-standard.csv,24
+V024,2026-09-24,架空取引先024,10851,invoices-standard.csv,25
+V025,2026-09-25,架空取引先025,10888,invoices-standard.csv,26
+V026,2026-09-26,架空取引先026,10925,invoices-standard.csv,27
+V027,2026-09-27,架空取引先027,10962,invoices-standard.csv,28
+V028,2026-09-28,架空取引先028,10999,invoices-standard.csv,29
+V029,2026-09-01,架空取引先029,11036,invoices-standard.csv,30
+V030,2026-09-02,架空取引先030,11073,invoices-standard.csv,31
+V031,2026-09-03,架空取引先031,11110,invoices-standard.csv,32
+V032,2026-09-04,架空取引先032,11147,invoices-standard.csv,33
+V033,2026-09-05,架空取引先033,11184,invoices-standard.csv,34
+V034,2026-09-06,架空取引先034,11221,invoices-standard.csv,35
+V035,2026-09-07,架空取引先035,11258,invoices-standard.csv,36
+V036,2026-09-08,架空取引先036,11295,invoices-standard.csv,37
+V037,2026-09-09,架空取引先037,11332,invoices-standard.csv,38
+V038,2026-09-10,架空取引先038,11369,invoices-standard.csv,39
+V039,2026-09-11,架空取引先039,11406,invoices-standard.csv,40
+V040,2026-09-12,架空取引先040,11443,invoices-standard.csv,41
+V041,2026-09-13,架空取引先041,11480,invoices-standard.csv,42
+V042,2026-09-14,架空取引先042,11517,invoices-standard.csv,43
+V043,2026-09-15,架空取引先043,11554,invoices-standard.csv,44
+V044,2026-09-16,架空取引先044,11591,invoices-standard.csv,45
+V045,2026-09-17,架空取引先045,11628,invoices-standard.csv,46
+V046,2026-09-18,架空取引先046,11665,invoices-standard.csv,47
+V047,2026-09-19,架空取引先047,11702,invoices-standard.csv,48
+V048,2026-09-20,架空取引先048,11739,invoices-standard.csv,49
+V049,2026-09-21,架空取引先049,11776,invoices-standard.csv,50
+V050,2026-09-22,架空取引先050,11813,invoices-standard.csv,51
+V051,2026-09-23,架空取引先051,11850,invoices-standard.csv,52
+V052,2026-09-24,架空取引先052,11887,invoices-standard.csv,53
+V053,2026-09-25,架空取引先053,11924,invoices-standard.csv,54
+V054,2026-09-26,架空取引先054,11961,invoices-standard.csv,55
+V055,2026-09-27,架空取引先055,11998,invoices-standard.csv,56
+V056,2026-09-28,架空取引先056,12035,invoices-standard.csv,57
+V057,2026-09-01,架空取引先057,12072,invoices-standard.csv,58
+V058,2026-09-02,架空取引先058,12109,invoices-standard.csv,59
+V059,2026-09-03,架空取引先059,12146,invoices-standard.csv,60
+V060,2026-09-04,架空取引先060,12183,invoices-standard.csv,61
+V061,2026-09-05,架空取引先061,12220,invoices-standard.csv,62
+V062,2026-09-06,架空取引先062,12257,invoices-standard.csv,63
+V063,2026-09-07,架空取引先063,12294,invoices-standard.csv,64
+V064,2026-09-08,架空取引先064,12331,invoices-standard.csv,65
+V065,2026-09-09,架空取引先065,12368,invoices-standard.csv,66
+V066,2026-09-10,架空取引先066,12405,invoices-standard.csv,67
+V067,2026-09-11,架空取引先067,12442,invoices-standard.csv,68
+V068,2026-09-12,架空取引先068,12479,invoices-standard.csv,69
+V069,2026-09-13,架空取引先069,12516,invoices-standard.csv,70
+V070,2026-09-14,架空取引先070,12553,invoices-standard.csv,71
+V071,2026-09-01,㈱ 架空表記確認先001,20000,invoices-standard.csv,72
+V072,2026-09-02,㈱ 架空表記確認先002,20041,invoices-standard.csv,73
+V073,2026-09-03,㈱ 架空表記確認先003,20082,invoices-standard.csv,74
+V074,2026-09-04,㈱ 架空表記確認先004,20123,invoices-standard.csv,75
+V075,2026-09-05,㈱ 架空表記確認先005,20164,invoices-standard.csv,76
+V076,2026-09-06,㈱ 架空表記確認先006,20205,invoices-standard.csv,77
+V077,2026-09-07,㈱ 架空表記確認先007,20246,invoices-standard.csv,78
+V078,2026-09-08,㈱ 架空表記確認先008,20287,invoices-standard.csv,79
+V079,2026-09-09,㈱ 架空表記確認先009,20328,invoices-standard.csv,80
+V080,2026-09-10,㈱ 架空表記確認先010,20369,invoices-standard.csv,81
+V081,2026-09-10,架空別会社B0,30000,invoices-standard.csv,82
+V082,2026-09-10,架空別会社B1,30053,invoices-standard.csv,83
+V083,2026-09-10,架空別会社B2,30106,invoices-standard.csv,84
+V084,,架空日付欠損0,31000,invoices-standard.csv,85
+V085,,架空日付欠損1,31059,invoices-standard.csv,86
+V086,2026-03-02,架空不正日付,32000,invoices-standard.csv,87
+V087,2026-09-10,,33000,invoices-standard.csv,88
+V088,2026-09-10,架空金額欠損,,invoices-standard.csv,89
+V089,2026-09-10,架空同額重複,34000,invoices-standard.csv,90
+V090,2026-09-10,架空同額重複,34000,invoices-standard.csv,91
+V091,2026-08-01,架空期間外0,35000,invoices-standard.csv,92
+V092,2026-08-01,架空期間外1,35061,invoices-standard.csv,93
+V093,2026-09-10,架空金額差0,36001,invoices-standard.csv,94
+V094,2026-09-10,架空金額差1,36068,invoices-standard.csv,95
+V095,2026-09-10,架空未計上候補,37100,invoices-standard.csv,96
+V096,2026-09-10,架空返金0,-38000,invoices-standard.csv,97
+V097,2026-09-10,架空返金1,-38071,invoices-standard.csv,98
+V098,2026-09-10,架空分割請求,21000,invoices-standard.csv,99
+V099,2026-09-10,架空分割請求,24000,invoices-standard.csv,100
+V100,2026-09-10,架空合算請求,49000,invoices-standard.csv,101

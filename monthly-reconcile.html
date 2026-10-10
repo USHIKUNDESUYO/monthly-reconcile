@@ -1,0 +1,1339 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>月次照合 独立確認版</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #183044;
+        --muted: #536978;
+        --accent: #146458;
+        --line: #ccd8de;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f4f7f8;
+        color: var(--ink);
+        font:
+          16px/1.6 system-ui,
+          "Yu Gothic",
+          sans-serif;
+      }
+      main {
+        max-width: 1200px;
+        margin: auto;
+        padding: 28px 24px 64px;
+      }
+      header {
+        border-left: 5px solid var(--accent);
+        padding: 0 0 0 20px;
+        margin-bottom: 24px;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 1.35;
+        margin: 8px 0;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      h3 {
+        font-size: 18px;
+      }
+      .tag {
+        font-size: 13px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+      .card {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 20px 0;
+      }
+      .inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin: 12px 0 5px;
+      }
+      input,
+      textarea,
+      select,
+      button {
+        font: inherit;
+      }
+      input[type="text"],
+      input[type="month"],
+      textarea,
+      select {
+        border: 1px solid #879caa;
+        border-radius: 6px;
+        padding: 9px;
+        width: 100%;
+        background: white;
+        color: var(--ink);
+      }
+      textarea {
+        height: 190px;
+        font:
+          13px/1.5 ui-monospace,
+          monospace;
+        resize: vertical;
+      }
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 7px;
+      }
+      button {
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: white;
+        border-radius: 6px;
+        padding: 10px 16px;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: white;
+        color: var(--accent);
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #c27514;
+        outline-offset: 3px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .notice {
+        padding: 16px;
+        background: #e6f2ee;
+        border-left: 4px solid var(--accent);
+      }
+      .error {
+        background: #fff0ee;
+        border-color: #ad3225;
+      }
+      .small {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .table-wrap {
+        max-height: 500px;
+        overflow: auto;
+        border: 1px solid var(--line);
+      }
+      table {
+        border-collapse: collapse;
+        min-width: 1020px;
+        width: 100%;
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        overflow-wrap: anywhere;
+        max-width: 210px;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        background: #eaf0f3;
+        z-index: 1;
+      }
+      .attention {
+        background: #fff9ed;
+      }
+      td button {
+        padding: 5px 9px;
+      }
+      .guide {
+        background: #edf7f3;
+        border: 1px solid #92b8aa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 16px 0;
+      }
+      .pair-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 16px 0;
+      }
+      .pair-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        background: #f8fafb;
+      }
+      .pair-card h3 {
+        margin-top: 0;
+      }
+      .pair-card dl {
+        margin: 0;
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 8px;
+      }
+      .pair-card dt {
+        font-weight: 600;
+      }
+      .pair-card dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid #b35d10;
+        outline-offset: 3px;
+      }
+      .editor {
+        border: 2px solid var(--accent);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      .inline {
+        max-width: 230px;
+      }
+      footer {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      @media (max-width: 680px) {
+        main {
+          padding: 20px 14px 40px;
+        }
+        .pair-grid {
+          grid-template-columns: 1fr;
+        }
+        .inputs {
+          grid-template-columns: 1fr;
+        }
+        .card {
+          padding: 16px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+        button {
+          min-height: 44px;
+        }
+        .actions button {
+          flex-grow: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="tag">星野宇潮 · 非公開の操作確認版 · guided.1</div>
+        <h1>帳簿と請求一覧を照合し、<br />確認の記録を残す</h1>
+        <p>
+          同じ日付・相手先・金額で、一意な1対1の候補を探します。入力と計算はこの端末内で行います。
+        </p>
+      </header>
+      <p class="notice">
+        候補は人による確認前です。未解決が残る状態を全件完了にしません。この確認版で、月次決算・申告・監査判断の完了を判定することはできません。
+      </p>
+      <section class="card">
+        <h2>1 対象月とCSVを入れる</h2>
+        <p>
+          UTF-8のCSVを選ぶか貼り付けてください。標準6列、または「日付,相手先,金額」の3列に対応します。1ファイル300行・1MBまでです。
+        </p>
+        <label for="period">対象月</label
+        ><input class="inline" id="period" type="month" value="2026-09" />
+        <label
+          ><input type="checkbox" id="aliases" />株式会社と㈱・(株)の先頭表記を同一視する</label
+        >
+        <p class="small">
+          同じ法人であることは原資料で確認してください。略称や内部の空白から別の法人を同一とは推定しません。
+        </p>
+        <div class="inputs">
+          <div>
+            <h3>帳簿</h3>
+            <label for="ledger-file">帳簿CSVを選択</label
+            ><input id="ledger-file" type="file" accept=".csv,text/csv" /><label for="ledger-name"
+              >元ファイル名</label
+            ><input id="ledger-name" type="text" value="ledger.csv" /><label for="ledger"
+              >帳簿CSVの内容</label
+            ><textarea id="ledger" spellcheck="false"></textarea>
+          </div>
+          <div>
+            <h3>請求一覧</h3>
+            <label for="invoices-file">請求CSVを選択</label
+            ><input id="invoices-file" type="file" accept=".csv,text/csv" /><label
+              for="invoices-name"
+              >元ファイル名</label
+            ><input id="invoices-name" type="text" value="invoices.csv" /><label for="invoices"
+              >請求CSVの内容</label
+            ><textarea id="invoices" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="run" type="button">候補を作成する</button
+          ><button id="demo" class="secondary" type="button">架空データで試す</button
+          ><button id="reset" class="secondary" type="button" disabled>
+            保存して入力を変更する
+          </button>
+        </div>
+        <div id="reset-panel" class="notice" hidden>
+          <p>
+            保存していない判断は失われます。必要なJSONとCSVを保存してから、入力変更へ進んでください。
+          </p>
+          <div class="actions">
+            <button id="reset-confirm" type="button">保存済み 入力変更へ進む</button
+            ><button id="reset-cancel" class="secondary" type="button">記録へ戻る</button>
+          </div>
+        </div>
+        <details>
+          <summary>保存した記録を再開する</summary>
+          <p>
+            この版が出力したJSONを読み込みます。入力ハッシュと候補を再計算し、判断履歴の整合を確認します。
+          </p>
+          <label for="resume">再開するJSON</label
+          ><input id="resume" type="file" accept=".json,application/json" />
+        </details>
+      </section>
+      <p id="message" class="notice" role="status" aria-live="polite">
+        架空データから操作を確認できます。外部への送信機能はありません。
+      </p>
+      <section id="results" class="card" hidden>
+        <h2>2 元の行と候補を確認する</h2>
+        <p id="counts"></p>
+        <p id="progress" role="status" aria-live="polite"></p>
+        <div class="guide" aria-labelledby="guide-title">
+          <h3 id="guide-title">まず1組、確認して保存する</h3>
+          <p id="next-step" role="status" aria-live="polite"></p>
+          <label for="reviewer">1 確認者IDを入力</label
+          ><input
+            id="reviewer"
+            class="inline"
+            type="text"
+            placeholder="起動確認なら OPERATOR"
+            maxlength="64"
+          />
+          <p class="small">
+            起動確認では OPERATOR と入力してください。自動では判断を記録しません。
+          </p>
+          <button id="open-first" type="button">2 未記入の候補を1組確認する</button>
+        </div>
+        <form id="review-form" class="card editor" hidden>
+          <h3>帳簿と請求を見比べて、判断を記録する</h3>
+          <p id="selected"></p>
+          <p id="basis"></p>
+          <div id="pair-details" class="pair-grid"></div>
+          <p>日付・相手先・金額と元の行を両側で確認してください。判断は自分で選びます。</p>
+          <label for="decision">判断</label
+          ><select id="decision" required>
+            <option value="" disabled>判断を選んでください</option>
+            <option value="pending">未解決</option>
+            <option value="accepted">この候補を採用する</option>
+            <option value="rejected">候補を使わない</option></select
+          ><label for="reason">判断理由 または不足している資料</label
+          ><textarea id="reason" required></textarea>
+          <p class="small">
+            候補を採用すると両側に同じ確認者・日時・理由を記録します。要確認・片側のみの行は採用できません。訂正が必要な行は未解決として訂正案を残してください。
+          </p>
+          <label
+            ><input
+              id="pair-confirm"
+              type="checkbox"
+            />候補の両側の日付・相手先・金額と元行を確認した</label
+          >
+          <p class="small">
+            「この候補を採用する」を選ぶ場合は、上の確認にチェックしてください。未解決や候補不採用の場合は不要です。
+          </p>
+          <button type="submit">この判断を記録する</button>
+          <button id="review-cancel" class="secondary" type="button">記録せずに閉じる</button>
+        </form>
+        <h3>3 判断を記録したら、2つのファイルを保存する</h3>
+        <div class="actions">
+          <button id="save-json" type="button" disabled>① JSONを保存（再開用）</button
+          ><button id="save-csv" class="secondary" type="button" disabled>
+            ② CSVを保存（確認表）
+          </button>
+        </div>
+        <p class="small">
+          JSONには元の入力データが含まれます。保存先の共有設定を確認してください。確認表CSVは数式として解釈される文字列の先頭にアポストロフィを付けます。
+        </p>
+        <p id="save-status" role="status" aria-live="polite"></p>
+        <details>
+          <summary>保存したJSONを再開する方法</summary>
+          <p>
+            このHTMLを別のタブで開き、上の「保存した記録を再開する」から保存したJSONを選びます。記入と未解決の件数が同じか確認してください。
+          </p>
+        </details>
+        <h3>全行の一覧</h3>
+
+        <label for="filter">表示する行</label
+        ><select id="filter" class="inline">
+          <option value="all">全行</option>
+          <option value="pending">未記入・未解決のみ</option>
+        </select>
+        <p id="shown" class="small"></p>
+        <div class="table-wrap" tabindex="0" aria-label="照合候補の全入力行">
+          <table>
+            <thead>
+              <tr>
+                <th>資料</th>
+                <th>行ID</th>
+                <th>元の行</th>
+                <th>日付</th>
+                <th>相手先</th>
+                <th>金額 円</th>
+                <th>分類</th>
+                <th>相手行</th>
+                <th>人の判断</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <details>
+          <summary>未記入の照合候補をまとめて記録する</summary>
+          <p>
+            各候補の両側を実際に確認した場合だけ使ってください。要確認・片側のみの行と、すでに判断を記入した候補は変更しません。
+          </p>
+          <label for="bulk-reason">共通の確認根拠</label><textarea id="bulk-reason"></textarea
+          ><label
+            ><input
+              id="bulk-confirm"
+              type="checkbox"
+            />未記入候補の両側の日付・相手先・金額と元行を確認した</label
+          ><button id="bulk-save" type="button">確認した未記入候補を記録する</button>
+        </details>
+      </section>
+      <footer>
+        <p>
+          入力ハッシュは入力の一致を確かめるための値です。証拠の真正性、確認者や日時の認証を保証するものではありません。
+        </p>
+        <p>
+          使い方と試験条件は同梱のREADME.mdを参照してください。問い合わせは試験担当者へ伝えてください。
+        </p>
+      </footer>
+    </main>
+    <script>
+      /* Monthly reconciliation preview. Newly authored code; no third-party runtime. */
+/* global TextEncoder, module */
+(function (root) {
+  "use strict";
+  const VERSION = "0.1.0-preview.20261009";
+  function parseCSV(text) {
+    const data = text.replace(/^\uFEFF/, "");
+    const records = [];
+    let fields = [],
+      field = "",
+      quoted = false,
+      closed = false,
+      line = 1,
+      start = 1;
+    const finish = () => {
+      fields.push(field);
+      records.push({ fields, line: start });
+      fields = [];
+      field = "";
+      closed = false;
+    };
+    for (let i = 0; i < data.length; i++) {
+      const c = data[i];
+      if (quoted) {
+        if (c === '"') {
+          if (data[i + 1] === '"') {
+            field += '"';
+            i++;
+          } else {
+            quoted = false;
+            closed = true;
+          }
+        } else {
+          field += c;
+          if (c === "\n" || (c === "\r" && data[i + 1] !== "\n")) line++;
+        }
+      } else if (c === '"') {
+        if (field || closed) throw Error("引用符の位置が不正です。元CSVを確認してください。");
+        quoted = true;
+      } else if (c === ",") {
+        fields.push(field);
+        field = "";
+        closed = false;
+      } else if (c === "\r" || c === "\n") {
+        if (c === "\r" && data[i + 1] === "\n") i++;
+        finish();
+        line++;
+        start = line;
+      } else {
+        if (closed) throw Error("引用符の後に区切り以外の文字があります。");
+        field += c;
+      }
+    }
+    if (quoted) throw Error("CSVの引用符が閉じていません。");
+    if (field || fields.length || closed) finish();
+    if (!records.length) throw Error("CSVが空です。");
+    return records;
+  }
+  function dateValue(raw) {
+    const text = String(raw).trim();
+    const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+    if (!m) return null;
+    const y = +m[1],
+      mo = +m[2],
+      d = +m[3];
+    const days = [
+      31,
+      y % 4 === 0 && (y % 100 !== 0 || y % 400 === 0) ? 29 : 28,
+      31,
+      30,
+      31,
+      30,
+      31,
+      31,
+      30,
+      31,
+      30,
+      31,
+    ];
+    return y >= 1900 && mo >= 1 && mo <= 12 && d >= 1 && d <= days[mo - 1] ? text : null;
+  }
+  function amountValue(raw) {
+    const text = String(raw).trim();
+    if (!/^[1-9]\d*$/.test(text)) return null;
+    const n = Number(text);
+    return Number.isSafeInteger(n) ? n : null;
+  }
+  function partyValue(raw, aliases = false) {
+    let text = String(raw).normalize("NFKC").trim();
+    if (aliases) text = text.replace(/^\(株\)\s*/, "株式会社");
+    return text || null;
+  }
+  function readInput(text, side, filename) {
+    if (typeof text !== "string" || new TextEncoder().encode(text).byteLength > 1000000)
+      throw Error("各CSVはUTF-8で1MB以内にしてください。");
+    const records = parseCSV(text),
+      header = records[0].fields;
+    const standard = [
+      "row_id",
+      "invoice_date",
+      "party",
+      "gross_amount_jpy",
+      "source_file",
+      "source_row",
+    ];
+    const simple = ["日付", "相手先", "金額"];
+    let mode;
+    if (JSON.stringify(header) === JSON.stringify(standard)) mode = "standard";
+    else if (JSON.stringify(header) === JSON.stringify(simple)) mode = "simple";
+    else throw Error("列名は標準6列、または日付・相手先・金額の3列にしてください。");
+    if (records.length < 2) throw Error("入力行がありません。");
+    if (records.length > 301)
+      throw Error("1ファイルは300行までです。分割して条件を記録してください。");
+    const ids = new Set();
+    return records.slice(1).map((record, index) => {
+      if (record.fields.length !== header.length)
+        throw Error(`${filename} の${record.line}行目で列数が合いません。空行も確認してください。`);
+      const values = Object.fromEntries(header.map((key, i) => [key, record.fields[i]]));
+      const id =
+        mode === "standard"
+          ? values.row_id
+          : `${side === "ledger" ? "L" : "V"}${String(index + 1).padStart(3, "0")}`;
+      if (!id || ids.has(id)) throw Error("行IDが空欄か重複しています。");
+      ids.add(id);
+      return {
+        side,
+        row_id: id,
+        invoice_date: values.invoice_date ?? values["日付"],
+        party: values.party ?? values["相手先"],
+        gross_amount_jpy: values.gross_amount_jpy ?? values["金額"],
+        source_file: filename,
+        source_row: record.line,
+        supplied_source_file: values.source_file ?? "",
+        supplied_source_row: values.source_row ?? "",
+        original_fields: record.fields.slice(),
+      };
+    });
+  }
+  function reconcile(ledger, invoices, options) {
+    if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(options.period))
+      throw Error("対象月をYYYY-MMで指定してください。");
+    if (+options.period.slice(0, 4) < 1900) throw Error("対象年は1900年以降にしてください。");
+    const all = [...ledger, ...invoices].map((row) => {
+      const date = dateValue(row.invoice_date),
+        amount = amountValue(row.gross_amount_jpy),
+        party = partyValue(row.party, options.corporateAliases);
+      const invalid = [];
+      if (!date) invalid.push("日付が未記入または実在するYYYY-MM-DDではない");
+      if (!party) invalid.push("相手先が未記入");
+      if (amount === null) invalid.push("金額が正の整数円ではない");
+      if (date && !date.startsWith(options.period + "-")) invalid.push("対象月の範囲外");
+      return {
+        ...row,
+        normalized: { date, party, amount },
+        invalid,
+        classification: "review_required",
+        reason: invalid.join("／"),
+        paired_row_id: "",
+      };
+    });
+    const sides = {
+      ledger: all.filter((r) => r.side === "ledger"),
+      invoices: all.filter((r) => r.side === "invoices"),
+    };
+    const key = (r) => JSON.stringify([r.normalized.date, r.normalized.party, r.normalized.amount]);
+    const maps = { ledger: new Map(), invoices: new Map() };
+    for (const row of all)
+      if (!row.invalid.length) {
+        const group = maps[row.side].get(key(row)) || [];
+        group.push(row);
+        maps[row.side].set(key(row), group);
+      }
+    const possible = (a, b) =>
+      ["date", "party", "amount"].every(
+        (k) =>
+          a.normalized[k] === null ||
+          b.normalized[k] === null ||
+          a.normalized[k] === b.normalized[k],
+      );
+    for (const row of all) {
+      if (row.invalid.length) continue;
+      const other = row.side === "ledger" ? "invoices" : "ledger";
+      const exact = maps[other].get(key(row)) || [],
+        own = maps[row.side].get(key(row)) || [];
+      const incompleteOther = sides[other].some((r) => r.invalid.length && possible(row, r));
+      const incompleteOwn = sides[row.side].some(
+        (r) => r !== row && r.invalid.length && possible(row, r),
+      );
+      if (exact.length === 1 && own.length === 1 && !incompleteOther && !incompleteOwn) {
+        row.classification = "auto_map_candidate";
+        row.paired_row_id = exact[0].row_id;
+        row.reason = "対象月内・日付金額相手先一致・両方向で一意な1対1。人による確認前";
+      } else if (exact.length > 1 || own.length > 1 || incompleteOther || incompleteOwn) {
+        row.reason = "重複または欠損のある行からも対応できるため一意に特定できない";
+      } else {
+        const related = sides[other].some(
+          (r) =>
+            (r.normalized.party && r.normalized.party === row.normalized.party) ||
+            (r.normalized.date === row.normalized.date &&
+              r.normalized.amount !== null &&
+              r.normalized.amount === row.normalized.amount),
+        );
+        row.classification = related ? "review_required" : "unmatched";
+        row.reason = related
+          ? "相手先・日付・金額の不一致、または分割・合算を確認する"
+          : "対応する相手行が見つからない";
+      }
+    }
+    return { version: VERSION, options: { ...options }, rows: all };
+  }
+  function recordReview(result, reviews, key, decision, reason, reviewer, timestamp) {
+    if (!["accepted", "rejected", "pending"].includes(decision))
+      throw Error("判断を選んでください。");
+    if (!reason.trim() || !reviewer.trim()) throw Error("理由と匿名確認者IDを記入してください。");
+    if (!/^[A-Za-z0-9_-]{1,64}$/.test(reviewer))
+      throw Error("確認者IDは英数字・ハイフン・アンダースコアで記入してください。");
+    if (
+      typeof timestamp !== "string" ||
+      !dateValue(timestamp.slice(0, 10)) ||
+      !/^\d{4}-\d{2}-\d{2}T([01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,3})?(?:Z|[+-](?:[01]\d|2[0-3]):[0-5]\d)$/.test(
+        timestamp,
+      ) ||
+      !Number.isFinite(Date.parse(timestamp))
+    )
+      throw Error("確認日時に実在する日付とタイムゾーンが必要です。");
+    const row = result.rows.find((r) => `${r.side}:${r.row_id}` === key);
+    if (!row) throw Error("対象行がありません。");
+    const changes = [];
+    const save = (r) => {
+      const id = `${r.side}:${r.row_id}`;
+      const after = {
+        decision,
+        reason: reason.trim(),
+        reviewer_id: reviewer,
+        reviewed_at: timestamp,
+        paired_row_id: decision === "accepted" ? r.paired_row_id : "",
+      };
+      changes.push({ key: id, before: reviews[id] ? { ...reviews[id] } : null, after });
+      reviews[id] = after;
+    };
+    if (decision === "accepted") {
+      if (row.classification !== "auto_map_candidate")
+        throw Error(
+          "要確認・片側のみの行は自動候補として採用できません。未解決か候補不採用を記録してください。",
+        );
+      const partner = result.rows.find(
+        (r) => r.side !== row.side && r.row_id === row.paired_row_id,
+      );
+      if (
+        !partner ||
+        partner.paired_row_id !== row.row_id ||
+        partner.classification !== "auto_map_candidate"
+      )
+        throw Error("相互の対応が一致しません。");
+      save(row);
+      save(partner);
+    } else {
+      // A changed decision also invalidates the former reciprocal acceptance.
+      const old = reviews[key];
+      if (old?.decision === "accepted") {
+        const partner = result.rows.find(
+          (r) => r.side !== row.side && r.row_id === old.paired_row_id,
+        );
+        if (partner) save(partner);
+      }
+      save(row);
+    }
+    return changes;
+  }
+  function summary(result, reviews) {
+    const counts = {
+      input_rows: result.rows.length,
+      candidate_rows: 0,
+      review_rows: 0,
+      unmatched_rows: 0,
+      recorded_rows: 0,
+      pending_rows: 0,
+    };
+    for (const r of result.rows) {
+      counts[
+        r.classification === "auto_map_candidate"
+          ? "candidate_rows"
+          : r.classification === "unmatched"
+            ? "unmatched_rows"
+            : "review_rows"
+      ]++;
+      const review = reviews[`${r.side}:${r.row_id}`];
+      if (review) counts.recorded_rows++;
+      if (!review || review.decision === "pending") counts.pending_rows++;
+    }
+    counts.record_complete =
+      counts.input_rows > 0 &&
+      counts.recorded_rows === counts.input_rows &&
+      counts.pending_rows === 0;
+    return counts;
+  }
+  function acceptUnreviewed(result, reviews, reason, reviewer, timestamp, confirmed) {
+    if (confirmed !== true) throw Error("候補の両側を確認したことをチェックしてください。");
+    const copy = { ...reviews },
+      actions = [];
+    for (const row of result.rows) {
+      const key = `${row.side}:${row.row_id}`;
+      if (
+        row.side !== "ledger" ||
+        row.classification !== "auto_map_candidate" ||
+        copy[key] ||
+        copy[`invoices:${row.paired_row_id}`]
+      )
+        continue;
+      const changes = recordReview(result, copy, key, "accepted", reason, reviewer, timestamp);
+      actions.push({ key, decision: "accepted", reason, reviewer, timestamp, changes });
+    }
+    Object.assign(reviews, copy);
+    return actions;
+  }
+  function replayAudit(result, actions) {
+    if (!Array.isArray(actions) || actions.length > 10000)
+      throw Error("判断履歴の件数または形式が不正です。");
+    const reviews = {};
+    for (const item of actions) {
+      const changes = recordReview(
+        result,
+        reviews,
+        item.key,
+        item.decision,
+        item.reason,
+        item.reviewer,
+        item.timestamp,
+      );
+      if (JSON.stringify(changes) !== JSON.stringify(item.changes))
+        throw Error("判断の変更前後と履歴が一致しません。");
+    }
+    return reviews;
+  }
+  function csvCell(value) {
+    let text = String(value ?? "");
+    // Spreadsheet formula guards deliberately cover leading C0 control characters.
+    // eslint-disable-next-line no-control-regex
+    if (/^[\s\u0000-\u001f]*[=+@-]/.test(text)) text = "'" + text;
+    return '"' + text.replace(/"/g, '""') + '"';
+  }
+  function checkpointJSON(
+    result,
+    sources,
+    inputHashes,
+    reviews,
+    audit,
+    savedAt = new Date().toISOString(),
+  ) {
+    if (!Array.isArray(audit) || audit.length > 10000)
+      throw Error(
+        "判断履歴は10000操作までです。直前の記録を保存し、試験担当者へ相談してください。",
+      );
+    const text = JSON.stringify(
+      {
+        schema_version: "1.0",
+        version: VERSION,
+        sources,
+        input_hashes: inputHashes,
+        options: result.options,
+        rows: result.rows,
+        reviews,
+        audit,
+        summary: summary(result, reviews),
+        saved_at: savedAt,
+        limits:
+          "Hashes identify input bytes, not authenticity. Human entries and dates are not authenticated. This is a review record, not a completed monthly closing or tax return.",
+      },
+      null,
+      2,
+    );
+    if (new TextEncoder().encode(text).byteLength > 4000000)
+      throw Error(
+        "この入力・判断では再開用JSONが4MBを超えます。入力を分割するか理由を短くしてください。記録は変更していません。",
+      );
+    return text;
+  }
+  function stageReviews(result, sources, inputHashes, reviews, audit, apply) {
+    const nextReviews = { ...reviews };
+    const actions = apply(nextReviews);
+    const nextAudit = audit.concat(actions);
+    checkpointJSON(result, sources, inputHashes, nextReviews, nextAudit);
+    return { reviews: nextReviews, audit: nextAudit, actions };
+  }
+  function confirmationCSV(result, reviews) {
+    const columns = [
+      "side",
+      "row_id",
+      "source_file",
+      "source_row",
+      "paired_row_id",
+      "decision",
+      "reason",
+      "reviewer_id",
+      "reviewed_at",
+    ];
+    const lines = [columns.join(",")];
+    for (const row of result.rows) {
+      const review = reviews[`${row.side}:${row.row_id}`] || {};
+      lines.push(
+        columns
+          .map((key) =>
+            csvCell(
+              key in review
+                ? review[key]
+                : ["side", "row_id", "source_file", "source_row"].includes(key)
+                  ? row[key]
+                  : "",
+            ),
+          )
+          .join(","),
+      );
+    }
+    return "\uFEFF" + lines.join("\r\n") + "\r\n";
+  }
+  const api = {
+    VERSION,
+    parseCSV,
+    dateValue,
+    amountValue,
+    partyValue,
+    readInput,
+    reconcile,
+    recordReview,
+    acceptUnreviewed,
+    replayAudit,
+    summary,
+    confirmationCSV,
+    csvCell,
+    checkpointJSON,
+    stageReviews,
+  };
+  if (typeof module !== "undefined" && module.exports) module.exports = api;
+  else root.MonthlyReconcile = api;
+})(typeof globalThis !== "undefined" ? globalThis : this);
+
+    </script>
+    <script>
+      const SYNTHETIC_DEMO = {"ledger": "row_id,invoice_date,party,gross_amount_jpy,source_file,source_row\nL001,2026-09-01,架空取引先001,10000,ledger-standard.csv,2\nL002,2026-09-02,架空取引先002,10037,ledger-standard.csv,3\nL003,2026-09-03,架空取引先003,10074,ledger-standard.csv,4\nL004,2026-09-04,架空取引先004,10111,ledger-standard.csv,5\nL005,2026-09-05,架空取引先005,10148,ledger-standard.csv,6\nL006,2026-09-06,架空取引先006,10185,ledger-standard.csv,7\nL007,2026-09-07,架空取引先007,10222,ledger-standard.csv,8\nL008,2026-09-08,架空取引先008,10259,ledger-standard.csv,9\nL009,2026-09-09,架空取引先009,10296,ledger-standard.csv,10\nL010,2026-09-10,架空取引先010,10333,ledger-standard.csv,11\nL011,2026-09-11,架空取引先011,10370,ledger-standard.csv,12\nL012,2026-09-12,架空取引先012,10407,ledger-standard.csv,13\nL013,2026-09-13,架空取引先013,10444,ledger-standard.csv,14\nL014,2026-09-14,架空取引先014,10481,ledger-standard.csv,15\nL015,2026-09-15,架空取引先015,10518,ledger-standard.csv,16\nL016,2026-09-16,架空取引先016,10555,ledger-standard.csv,17\nL017,2026-09-17,架空取引先017,10592,ledger-standard.csv,18\nL018,2026-09-18,架空取引先018,10629,ledger-standard.csv,19\nL019,2026-09-19,架空取引先019,10666,ledger-standard.csv,20\nL020,2026-09-20,架空取引先020,10703,ledger-standard.csv,21\nL021,2026-09-21,架空取引先021,10740,ledger-standard.csv,22\nL022,2026-09-22,架空取引先022,10777,ledger-standard.csv,23\nL023,2026-09-23,架空取引先023,10814,ledger-standard.csv,24\nL024,2026-09-24,架空取引先024,10851,ledger-standard.csv,25\nL025,2026-09-25,架空取引先025,10888,ledger-standard.csv,26\nL026,2026-09-26,架空取引先026,10925,ledger-standard.csv,27\nL027,2026-09-27,架空取引先027,10962,ledger-standard.csv,28\nL028,2026-09-28,架空取引先028,10999,ledger-standard.csv,29\nL029,2026-09-01,架空取引先029,11036,ledger-standard.csv,30\nL030,2026-09-02,架空取引先030,11073,ledger-standard.csv,31\nL031,2026-09-03,架空取引先031,11110,ledger-standard.csv,32\nL032,2026-09-04,架空取引先032,11147,ledger-standard.csv,33\nL033,2026-09-05,架空取引先033,11184,ledger-standard.csv,34\nL034,2026-09-06,架空取引先034,11221,ledger-standard.csv,35\nL035,2026-09-07,架空取引先035,11258,ledger-standard.csv,36\nL036,2026-09-08,架空取引先036,11295,ledger-standard.csv,37\nL037,2026-09-09,架空取引先037,11332,ledger-standard.csv,38\nL038,2026-09-10,架空取引先038,11369,ledger-standard.csv,39\nL039,2026-09-11,架空取引先039,11406,ledger-standard.csv,40\nL040,2026-09-12,架空取引先040,11443,ledger-standard.csv,41\nL041,2026-09-13,架空取引先041,11480,ledger-standard.csv,42\nL042,2026-09-14,架空取引先042,11517,ledger-standard.csv,43\nL043,2026-09-15,架空取引先043,11554,ledger-standard.csv,44\nL044,2026-09-16,架空取引先044,11591,ledger-standard.csv,45\nL045,2026-09-17,架空取引先045,11628,ledger-standard.csv,46\nL046,2026-09-18,架空取引先046,11665,ledger-standard.csv,47\nL047,2026-09-19,架空取引先047,11702,ledger-standard.csv,48\nL048,2026-09-20,架空取引先048,11739,ledger-standard.csv,49\nL049,2026-09-21,架空取引先049,11776,ledger-standard.csv,50\nL050,2026-09-22,架空取引先050,11813,ledger-standard.csv,51\nL051,2026-09-23,架空取引先051,11850,ledger-standard.csv,52\nL052,2026-09-24,架空取引先052,11887,ledger-standard.csv,53\nL053,2026-09-25,架空取引先053,11924,ledger-standard.csv,54\nL054,2026-09-26,架空取引先054,11961,ledger-standard.csv,55\nL055,2026-09-27,架空取引先055,11998,ledger-standard.csv,56\nL056,2026-09-28,架空取引先056,12035,ledger-standard.csv,57\nL057,2026-09-01,架空取引先057,12072,ledger-standard.csv,58\nL058,2026-09-02,架空取引先058,12109,ledger-standard.csv,59\nL059,2026-09-03,架空取引先059,12146,ledger-standard.csv,60\nL060,2026-09-04,架空取引先060,12183,ledger-standard.csv,61\nL061,2026-09-05,架空取引先061,12220,ledger-standard.csv,62\nL062,2026-09-06,架空取引先062,12257,ledger-standard.csv,63\nL063,2026-09-07,架空取引先063,12294,ledger-standard.csv,64\nL064,2026-09-08,架空取引先064,12331,ledger-standard.csv,65\nL065,2026-09-09,架空取引先065,12368,ledger-standard.csv,66\nL066,2026-09-10,架空取引先066,12405,ledger-standard.csv,67\nL067,2026-09-11,架空取引先067,12442,ledger-standard.csv,68\nL068,2026-09-12,架空取引先068,12479,ledger-standard.csv,69\nL069,2026-09-13,架空取引先069,12516,ledger-standard.csv,70\nL070,2026-09-14,架空取引先070,12553,ledger-standard.csv,71\nL071,2026-09-01,株式会社架空表記確認先001,20000,ledger-standard.csv,72\nL072,2026-09-02,株式会社架空表記確認先002,20041,ledger-standard.csv,73\nL073,2026-09-03,株式会社架空表記確認先003,20082,ledger-standard.csv,74\nL074,2026-09-04,株式会社架空表記確認先004,20123,ledger-standard.csv,75\nL075,2026-09-05,株式会社架空表記確認先005,20164,ledger-standard.csv,76\nL076,2026-09-06,株式会社架空表記確認先006,20205,ledger-standard.csv,77\nL077,2026-09-07,株式会社架空表記確認先007,20246,ledger-standard.csv,78\nL078,2026-09-08,株式会社架空表記確認先008,20287,ledger-standard.csv,79\nL079,2026-09-09,株式会社架空表記確認先009,20328,ledger-standard.csv,80\nL080,2026-09-10,株式会社架空表記確認先010,20369,ledger-standard.csv,81\nL081,2026-09-10,架空別会社A0,30000,ledger-standard.csv,82\nL082,2026-09-10,架空別会社A1,30053,ledger-standard.csv,83\nL083,2026-09-10,架空別会社A2,30106,ledger-standard.csv,84\nL084,,架空日付欠損0,31000,ledger-standard.csv,85\nL085,,架空日付欠損1,31059,ledger-standard.csv,86\nL086,2026-02-30,架空不正日付,32000,ledger-standard.csv,87\nL087,2026-09-10,,33000,ledger-standard.csv,88\nL088,2026-09-10,架空金額欠損,,ledger-standard.csv,89\nL089,2026-09-10,架空同額重複,34000,ledger-standard.csv,90\nL090,2026-09-10,架空同額重複,34000,ledger-standard.csv,91\nL091,2026-09-10,架空期間外0,35000,ledger-standard.csv,92\nL092,2026-09-10,架空期間外1,35061,ledger-standard.csv,93\nL093,2026-09-10,架空金額差0,36000,ledger-standard.csv,94\nL094,2026-09-10,架空金額差1,36067,ledger-standard.csv,95\nL095,2026-09-10,架空資料不足,37000,ledger-standard.csv,96\nL096,2026-09-10,架空返金0,-38000,ledger-standard.csv,97\nL097,2026-09-10,架空返金1,-38071,ledger-standard.csv,98\nL098,2026-09-10,架空分割請求,45000,ledger-standard.csv,99\nL099,2026-09-10,架空合算請求,22000,ledger-standard.csv,100\nL100,2026-09-10,架空合算請求,27000,ledger-standard.csv,101\n", "invoices": "row_id,invoice_date,party,gross_amount_jpy,source_file,source_row\nV001,2026-09-01,架空取引先001,10000,invoices-standard.csv,2\nV002,2026-09-02,架空取引先002,10037,invoices-standard.csv,3\nV003,2026-09-03,架空取引先003,10074,invoices-standard.csv,4\nV004,2026-09-04,架空取引先004,10111,invoices-standard.csv,5\nV005,2026-09-05,架空取引先005,10148,invoices-standard.csv,6\nV006,2026-09-06,架空取引先006,10185,invoices-standard.csv,7\nV007,2026-09-07,架空取引先007,10222,invoices-standard.csv,8\nV008,2026-09-08,架空取引先008,10259,invoices-standard.csv,9\nV009,2026-09-09,架空取引先009,10296,invoices-standard.csv,10\nV010,2026-09-10,架空取引先010,10333,invoices-standard.csv,11\nV011,2026-09-11,架空取引先011,10370,invoices-standard.csv,12\nV012,2026-09-12,架空取引先012,10407,invoices-standard.csv,13\nV013,2026-09-13,架空取引先013,10444,invoices-standard.csv,14\nV014,2026-09-14,架空取引先014,10481,invoices-standard.csv,15\nV015,2026-09-15,架空取引先015,10518,invoices-standard.csv,16\nV016,2026-09-16,架空取引先016,10555,invoices-standard.csv,17\nV017,2026-09-17,架空取引先017,10592,invoices-standard.csv,18\nV018,2026-09-18,架空取引先018,10629,invoices-standard.csv,19\nV019,2026-09-19,架空取引先019,10666,invoices-standard.csv,20\nV020,2026-09-20,架空取引先020,10703,invoices-standard.csv,21\nV021,2026-09-21,架空取引先021,10740,invoices-standard.csv,22\nV022,2026-09-22,架空取引先022,10777,invoices-standard.csv,23\nV023,2026-09-23,架空取引先023,10814,invoices-standard.csv,24\nV024,2026-09-24,架空取引先024,10851,invoices-standard.csv,25\nV025,2026-09-25,架空取引先025,10888,invoices-standard.csv,26\nV026,2026-09-26,架空取引先026,10925,invoices-standard.csv,27\nV027,2026-09-27,架空取引先027,10962,invoices-standard.csv,28\nV028,2026-09-28,架空取引先028,10999,invoices-standard.csv,29\nV029,2026-09-01,架空取引先029,11036,invoices-standard.csv,30\nV030,2026-09-02,架空取引先030,11073,invoices-standard.csv,31\nV031,2026-09-03,架空取引先031,11110,invoices-standard.csv,32\nV032,2026-09-04,架空取引先032,11147,invoices-standard.csv,33\nV033,2026-09-05,架空取引先033,11184,invoices-standard.csv,34\nV034,2026-09-06,架空取引先034,11221,invoices-standard.csv,35\nV035,2026-09-07,架空取引先035,11258,invoices-standard.csv,36\nV036,2026-09-08,架空取引先036,11295,invoices-standard.csv,37\nV037,2026-09-09,架空取引先037,11332,invoices-standard.csv,38\nV038,2026-09-10,架空取引先038,11369,invoices-standard.csv,39\nV039,2026-09-11,架空取引先039,11406,invoices-standard.csv,40\nV040,2026-09-12,架空取引先040,11443,invoices-standard.csv,41\nV041,2026-09-13,架空取引先041,11480,invoices-standard.csv,42\nV042,2026-09-14,架空取引先042,11517,invoices-standard.csv,43\nV043,2026-09-15,架空取引先043,11554,invoices-standard.csv,44\nV044,2026-09-16,架空取引先044,11591,invoices-standard.csv,45\nV045,2026-09-17,架空取引先045,11628,invoices-standard.csv,46\nV046,2026-09-18,架空取引先046,11665,invoices-standard.csv,47\nV047,2026-09-19,架空取引先047,11702,invoices-standard.csv,48\nV048,2026-09-20,架空取引先048,11739,invoices-standard.csv,49\nV049,2026-09-21,架空取引先049,11776,invoices-standard.csv,50\nV050,2026-09-22,架空取引先050,11813,invoices-standard.csv,51\nV051,2026-09-23,架空取引先051,11850,invoices-standard.csv,52\nV052,2026-09-24,架空取引先052,11887,invoices-standard.csv,53\nV053,2026-09-25,架空取引先053,11924,invoices-standard.csv,54\nV054,2026-09-26,架空取引先054,11961,invoices-standard.csv,55\nV055,2026-09-27,架空取引先055,11998,invoices-standard.csv,56\nV056,2026-09-28,架空取引先056,12035,invoices-standard.csv,57\nV057,2026-09-01,架空取引先057,12072,invoices-standard.csv,58\nV058,2026-09-02,架空取引先058,12109,invoices-standard.csv,59\nV059,2026-09-03,架空取引先059,12146,invoices-standard.csv,60\nV060,2026-09-04,架空取引先060,12183,invoices-standard.csv,61\nV061,2026-09-05,架空取引先061,12220,invoices-standard.csv,62\nV062,2026-09-06,架空取引先062,12257,invoices-standard.csv,63\nV063,2026-09-07,架空取引先063,12294,invoices-standard.csv,64\nV064,2026-09-08,架空取引先064,12331,invoices-standard.csv,65\nV065,2026-09-09,架空取引先065,12368,invoices-standard.csv,66\nV066,2026-09-10,架空取引先066,12405,invoices-standard.csv,67\nV067,2026-09-11,架空取引先067,12442,invoices-standard.csv,68\nV068,2026-09-12,架空取引先068,12479,invoices-standard.csv,69\nV069,2026-09-13,架空取引先069,12516,invoices-standard.csv,70\nV070,2026-09-14,架空取引先070,12553,invoices-standard.csv,71\nV071,2026-09-01,㈱ 架空表記確認先001,20000,invoices-standard.csv,72\nV072,2026-09-02,㈱ 架空表記確認先002,20041,invoices-standard.csv,73\nV073,2026-09-03,㈱ 架空表記確認先003,20082,invoices-standard.csv,74\nV074,2026-09-04,㈱ 架空表記確認先004,20123,invoices-standard.csv,75\nV075,2026-09-05,㈱ 架空表記確認先005,20164,invoices-standard.csv,76\nV076,2026-09-06,㈱ 架空表記確認先006,20205,invoices-standard.csv,77\nV077,2026-09-07,㈱ 架空表記確認先007,20246,invoices-standard.csv,78\nV078,2026-09-08,㈱ 架空表記確認先008,20287,invoices-standard.csv,79\nV079,2026-09-09,㈱ 架空表記確認先009,20328,invoices-standard.csv,80\nV080,2026-09-10,㈱ 架空表記確認先010,20369,invoices-standard.csv,81\nV081,2026-09-10,架空別会社B0,30000,invoices-standard.csv,82\nV082,2026-09-10,架空別会社B1,30053,invoices-standard.csv,83\nV083,2026-09-10,架空別会社B2,30106,invoices-standard.csv,84\nV084,,架空日付欠損0,31000,invoices-standard.csv,85\nV085,,架空日付欠損1,31059,invoices-standard.csv,86\nV086,2026-03-02,架空不正日付,32000,invoices-standard.csv,87\nV087,2026-09-10,,33000,invoices-standard.csv,88\nV088,2026-09-10,架空金額欠損,,invoices-standard.csv,89\nV089,2026-09-10,架空同額重複,34000,invoices-standard.csv,90\nV090,2026-09-10,架空同額重複,34000,invoices-standard.csv,91\nV091,2026-08-01,架空期間外0,35000,invoices-standard.csv,92\nV092,2026-08-01,架空期間外1,35061,invoices-standard.csv,93\nV093,2026-09-10,架空金額差0,36001,invoices-standard.csv,94\nV094,2026-09-10,架空金額差1,36068,invoices-standard.csv,95\nV095,2026-09-10,架空未計上候補,37100,invoices-standard.csv,96\nV096,2026-09-10,架空返金0,-38000,invoices-standard.csv,97\nV097,2026-09-10,架空返金1,-38071,invoices-standard.csv,98\nV098,2026-09-10,架空分割請求,21000,invoices-standard.csv,99\nV099,2026-09-10,架空分割請求,24000,invoices-standard.csv,100\nV100,2026-09-10,架空合算請求,49000,invoices-standard.csv,101\n"};
+    </script>
+    <script>
+      /* global MonthlyReconcile, SYNTHETIC_DEMO, document, crypto, TextEncoder, TextDecoder, URL, Blob, setTimeout */
+"use strict";
+const core = MonthlyReconcile;
+const el = (id) => document.getElementById(id);
+let result = null,
+  reviews = {},
+  audit = [],
+  sources = null,
+  inputHashes = null,
+  chosen = null,
+  processing = false;
+let savedExports = { json: false, csv: false };
+const showError = (error) => {
+  el("message").textContent = error.message || String(error);
+  el("message").className = "notice error";
+};
+async function hash(text) {
+  if (!globalThis.crypto?.subtle)
+    throw Error(
+      "このブラウザーでは入力ハッシュを作成できません。ChromeまたはEdgeで開いてください。",
+    );
+  const buffer = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return [...new Uint8Array(buffer)].map((x) => x.toString(16).padStart(2, "0")).join("");
+}
+function lock(locked) {
+  for (const id of [
+    "ledger",
+    "invoices",
+    "ledger-name",
+    "invoices-name",
+    "period",
+    "aliases",
+    "ledger-file",
+    "invoices-file",
+    "demo",
+    "run",
+  ])
+    el(id).disabled = locked;
+  for (const id of ["save-json", "save-csv", "reset"]) el(id).disabled = !locked;
+}
+function render() {
+  const s = core.summary(result, reviews);
+  el("counts").textContent =
+    `入力 ${s.input_rows}行 ／ 照合候補 ${s.candidate_rows / 2}組 ／ 要確認 ${s.review_rows}行 ／ 片側のみ ${s.unmatched_rows}行`;
+  el("progress").textContent =
+    `記入 ${s.recorded_rows}行 ／ 未記入・未解決 ${s.pending_rows}行。${s.record_complete ? "全行の判断記録が揃いました。会計判断の正しさや月次決算の完了は別途確認してください。" : "確認待ちがあります。全件完了として扱わないでください。"}`;
+  const body = el("rows");
+  body.replaceChildren();
+  const labels = {
+    auto_map_candidate: "照合候補",
+    review_required: "要確認",
+    unmatched: "片側のみ",
+  };
+  const decisions = { accepted: "採用", rejected: "候補不採用", pending: "未解決" };
+  const filtered = result.rows.filter(
+    (row) =>
+      el("filter").value !== "pending" ||
+      !reviews[`${row.side}:${row.row_id}`] ||
+      reviews[`${row.side}:${row.row_id}`].decision === "pending",
+  );
+  for (const row of filtered) {
+    const key = `${row.side}:${row.row_id}`,
+      review = reviews[key],
+      tr = document.createElement("tr");
+    tr.className = row.classification === "auto_map_candidate" ? "" : "attention";
+    const values = [
+      row.side === "ledger" ? "帳簿" : "請求",
+      row.row_id,
+      `${row.source_file} ${row.source_row}行`,
+      row.invoice_date,
+      row.party,
+      row.gross_amount_jpy,
+      labels[row.classification],
+      row.paired_row_id || "—",
+      review ? decisions[review.decision] : "未記入",
+    ];
+    for (const value of values) {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.append(td);
+    }
+    const td = document.createElement("td"),
+      button = document.createElement("button");
+    button.type = "button";
+    button.textContent = "確認";
+    button.setAttribute("aria-label", `${values[0]} ${row.row_id} を確認`);
+    button.addEventListener("click", () => selectRow(row));
+    td.append(button);
+    tr.append(td);
+    body.append(tr);
+  }
+  el("shown").textContent = `${filtered.length}行を表示中`;
+  renderGuide();
+}
+function renderGuide() {
+  if (!result) return;
+  const s = core.summary(result, reviews);
+  const next = result.rows.find(
+    (row) => row.classification === "auto_map_candidate" && !reviews[`${row.side}:${row.row_id}`],
+  );
+  el("open-first").disabled = !next || !el("review-form").hidden;
+  el("next-step").textContent = !el("reviewer").value.trim()
+    ? "まず、下の確認者IDにOPERATORと入力してください。"
+    : !el("review-form").hidden
+      ? "両側の元データを確認し、判断と理由を選んで「この判断を記録する」を押してください。"
+      : s.recorded_rows === 0
+        ? next
+          ? "次に「2 未記入の候補を1組確認する」を押してください。"
+          : "照合候補がありません。下の一覧から要確認の行を開いてください。"
+        : "判断を記録しました。次は、下のJSONとCSVをそれぞれ保存してください。";
+  el("save-status").textContent =
+    savedExports.json && savedExports.csv
+      ? "JSONとCSVの保存を開始しました。ダウンロード先で両方のファイルを確認してから、別のタブでJSONを再開してください。"
+      : savedExports.json
+        ? "JSONの保存を開始しました。次にCSVも保存してください。"
+        : savedExports.csv
+          ? "CSVの保存を開始しました。次にJSONも保存してください。"
+          : s.recorded_rows === 0
+            ? "今は判断が0行です。保存しても、確認済みの記録は入りません。"
+            : `判断を記録した${s.recorded_rows}行と、残る未記入・未解決${s.pending_rows}行を両方のファイルに保存します。`;
+}
+function renderPair(row) {
+  const box = el("pair-details");
+  box.replaceChildren();
+  const partner = result.rows.find(
+    (other) => other.side !== row.side && other.row_id === row.paired_row_id,
+  );
+  for (const item of partner ? [row, partner].sort((a) => (a.side === "ledger" ? -1 : 1)) : [row]) {
+    const card = document.createElement("div"),
+      heading = document.createElement("h3"),
+      list = document.createElement("dl");
+    card.className = "pair-card";
+    heading.textContent = item.side === "ledger" ? "帳簿の元データ" : "請求の元データ";
+    card.append(heading, list);
+    for (const [label, value] of [
+      ["行ID", item.row_id],
+      ["元の行", `${item.source_file} ${item.source_row}行`],
+      ["日付", item.invoice_date],
+      ["相手先", item.party],
+      ["金額", `${item.gross_amount_jpy}円`],
+    ]) {
+      const term = document.createElement("dt"),
+        description = document.createElement("dd");
+      term.textContent = label;
+      description.textContent = value;
+      list.append(term, description);
+    }
+    box.append(card);
+  }
+}
+function selectRow(row) {
+  if (!el("reviewer").value.trim()) {
+    showError(Error("先に確認者IDを入力してください。起動確認ではOPERATORを使えます。"));
+    el("reviewer").focus();
+    return;
+  }
+  chosen = `${row.side}:${row.row_id}`;
+  const review = reviews[chosen];
+  el("selected").textContent =
+    `${row.side === "ledger" ? "帳簿" : "請求"} ${row.row_id} ／ ${row.source_file} ${row.source_row}行`;
+  el("basis").textContent = row.reason;
+  el("decision").value = review?.decision || "";
+  el("reason").value = review?.reason || "";
+  el("decision").querySelector('option[value="accepted"]').disabled =
+    row.classification !== "auto_map_candidate";
+  el("review-form").hidden = false;
+  el("pair-confirm").checked = false;
+  el("pair-confirm").disabled = row.classification !== "auto_map_candidate";
+  renderPair(row);
+  el("review-form").scrollIntoView({ behavior: "smooth", block: "start" });
+  el("decision").focus({ preventScroll: true });
+  el("message").textContent = "両側の元データを表示しました。確認してから判断を記録してください。";
+  el("message").className = "notice";
+  renderGuide();
+}
+function download(name, text, type, kind) {
+  const url = URL.createObjectURL(new Blob([text], { type })),
+    a = document.createElement("a");
+  a.href = url;
+  a.download = name;
+  document.body.append(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 10000);
+  el("message").textContent =
+    "保存を開始しました。ブラウザーのダウンロード先でファイルを確認してください。";
+  el("message").className = "notice";
+  savedExports[kind] = true;
+  renderGuide();
+}
+async function run() {
+  try {
+    processing = true;
+    el("run").disabled = true;
+    const input = {
+      ledger: { text: el("ledger").value, name: el("ledger-name").value },
+      invoices: { text: el("invoices").value, name: el("invoices-name").value },
+    };
+    for (const item of Object.values(input))
+      if (!item.name.trim() || item.text.length > 1000000)
+        throw Error("入力名を記入し、各CSVは1MB以内にしてください。");
+    const options = { period: el("period").value, corporateAliases: el("aliases").checked };
+    const calculation = core.reconcile(
+      core.readInput(input.ledger.text, "ledger", input.ledger.name),
+      core.readInput(input.invoices.text, "invoices", input.invoices.name),
+      options,
+    );
+    lock(true);
+    const hashes = {
+      ledger: await hash(input.ledger.text),
+      invoices: await hash(input.invoices.text),
+    };
+    core.checkpointJSON(calculation, input, hashes, {}, []);
+    result = calculation;
+    sources = input;
+    inputHashes = hashes;
+    reviews = {};
+    audit = [];
+    savedExports = { json: false, csv: false };
+    el("results").hidden = false;
+    el("review-form").hidden = true;
+    el("message").textContent = "候補を作成しました。各行の根拠を確認し、判断を記入してください。";
+    el("message").className = "notice";
+    render();
+    el("results").scrollIntoView({ behavior: "smooth", block: "start" });
+    el("reviewer").focus({ preventScroll: true });
+  } catch (error) {
+    if (!result) lock(false);
+    showError(error);
+  } finally {
+    processing = false;
+  }
+}
+el("run").addEventListener("click", run);
+el("demo").addEventListener("click", async () => {
+  el("ledger").value = SYNTHETIC_DEMO.ledger;
+  el("invoices").value = SYNTHETIC_DEMO.invoices;
+  el("ledger-name").value = "ledger-standard.csv";
+  el("invoices-name").value = "invoices-standard.csv";
+  el("period").value = "2026-09";
+  el("aliases").checked = true;
+  await run();
+});
+el("reviewer").addEventListener("input", renderGuide);
+el("open-first").addEventListener("click", () => {
+  if (!result) return;
+  const row = result.rows.find(
+    (item) =>
+      item.classification === "auto_map_candidate" && !reviews[`${item.side}:${item.row_id}`],
+  );
+  if (row) selectRow(row);
+});
+el("review-cancel").addEventListener("click", () => {
+  chosen = null;
+  el("review-form").hidden = true;
+  renderGuide();
+});
+for (const side of ["ledger", "invoices"])
+  el(`${side}-file`).addEventListener("change", async (event) => {
+    try {
+      const file = event.target.files[0];
+      if (!file) return;
+      if (file.size > 1000000) throw Error("CSVは1MB以内にしてください。");
+      const bytes = await file.arrayBuffer();
+      if (result || processing)
+        throw Error("処理を終え、先に保存して入力を変更するボタンを押してください。");
+      const text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes);
+      el(side).value = text;
+      el(`${side}-name`).value = file.name;
+      el("message").textContent = "CSVを端末内で読み込みました。対象月を確認してください。";
+    } catch (error) {
+      showError(error);
+    }
+  });
+el("review-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  try {
+    if (!["accepted", "rejected", "pending"].includes(el("decision").value))
+      throw Error("判断を選んでください。採用・候補不採用・未解決から選べます。");
+    if (el("decision").value === "accepted" && !el("pair-confirm").checked)
+      throw Error("両側の元データを確認し、確認したチェックを入れてください。");
+    const action = {
+      key: chosen,
+      decision: el("decision").value,
+      reason: el("reason").value,
+      reviewer: el("reviewer").value,
+      timestamp: new Date().toISOString(),
+    };
+    const next = core.stageReviews(result, sources, inputHashes, reviews, audit, (copy) => {
+      const changes = core.recordReview(
+        result,
+        copy,
+        action.key,
+        action.decision,
+        action.reason,
+        action.reviewer,
+        action.timestamp,
+      );
+      return [{ ...action, changes }];
+    });
+    reviews = next.reviews;
+    audit = next.audit;
+    savedExports = { json: false, csv: false };
+    const changes = next.actions[0].changes;
+    render();
+    el("message").textContent =
+      changes.length === 2 ? "両側の判断を記録しました。" : "判断を記録しました。";
+    el("message").className = "notice";
+    el("review-form").hidden = true;
+    renderGuide();
+    el("save-json").focus();
+  } catch (error) {
+    showError(error);
+  }
+});
+el("filter").addEventListener("change", () => {
+  if (result) render();
+});
+el("bulk-save").addEventListener("click", () => {
+  try {
+    const next = core.stageReviews(result, sources, inputHashes, reviews, audit, (copy) =>
+      core.acceptUnreviewed(
+        result,
+        copy,
+        el("bulk-reason").value,
+        el("reviewer").value,
+        new Date().toISOString(),
+        el("bulk-confirm").checked,
+      ),
+    );
+    reviews = next.reviews;
+    audit = next.audit;
+    savedExports = { json: false, csv: false };
+    const actions = next.actions;
+    render();
+    el("bulk-confirm").checked = false;
+    const remaining = core.summary(result, reviews).pending_rows;
+    el("message").textContent =
+      `${actions.length}組の未記入候補を、人による確認済みとして記録しました。${remaining ? `未記入・未解決は${remaining}行です。` : "全行の判断記録が揃いました。"}`;
+    el("message").className = "notice";
+  } catch (error) {
+    showError(error);
+  }
+});
+el("save-csv").addEventListener("click", () => {
+  if (result)
+    download(
+      `confirmation-${result.options.period}.csv`,
+      core.confirmationCSV(result, reviews),
+      "text/csv;charset=utf-8",
+      "csv",
+    );
+});
+el("save-json").addEventListener("click", () => {
+  if (!result) return;
+  try {
+    const text = core.checkpointJSON(result, sources, inputHashes, reviews, audit);
+    download(`reconcile-${result.options.period}.json`, text, "application/json", "json");
+  } catch (error) {
+    showError(error);
+  }
+});
+el("resume").addEventListener("change", async (event) => {
+  try {
+    const file = event.target.files[0];
+    if (!file) return;
+    if (result || processing)
+      throw Error("処理を終え、先に保存し、入力を変更するボタンを押してください。");
+    if (file.size > 4000000) throw Error("再開ファイルは4MB以内にしてください。");
+    const saved = JSON.parse(await file.text());
+    if (
+      saved.schema_version !== "1.0" ||
+      saved.version !== core.VERSION ||
+      !Array.isArray(saved.audit) ||
+      typeof saved.options?.period !== "string" ||
+      typeof saved.options?.corporateAliases !== "boolean"
+    )
+      throw Error("この確認版の保存形式ではありません。");
+    for (const side of ["ledger", "invoices"]) {
+      if (
+        typeof saved.sources?.[side]?.text !== "string" ||
+        typeof saved.sources?.[side]?.name !== "string" ||
+        saved.sources[side].text.length > 1000000 ||
+        (await hash(saved.sources[side].text)) !== saved.input_hashes?.[side]
+      )
+        throw Error("保存した入力とハッシュが一致しません。");
+    }
+    const calculation = core.reconcile(
+      core.readInput(saved.sources.ledger.text, "ledger", saved.sources.ledger.name),
+      core.readInput(saved.sources.invoices.text, "invoices", saved.sources.invoices.name),
+      saved.options,
+    );
+    const replay = core.replayAudit(calculation, saved.audit);
+    if (
+      JSON.stringify(replay) !== JSON.stringify(saved.reviews) ||
+      JSON.stringify(calculation.rows) !== JSON.stringify(saved.rows)
+    )
+      throw Error("判断記録または候補の再計算結果が一致しません。");
+    core.checkpointJSON(calculation, saved.sources, saved.input_hashes, replay, saved.audit);
+    result = calculation;
+    reviews = replay;
+    audit = saved.audit;
+    savedExports = { json: false, csv: false };
+    sources = saved.sources;
+    inputHashes = saved.input_hashes;
+    for (const side of ["ledger", "invoices"]) {
+      el(side).value = sources[side].text;
+      el(`${side}-name`).value = sources[side].name;
+    }
+    el("period").value = result.options.period;
+    el("aliases").checked = result.options.corporateAliases;
+    lock(true);
+    el("results").hidden = false;
+    el("review-form").hidden = true;
+    render();
+    el("results").scrollIntoView({ behavior: "smooth", block: "start" });
+    el("message").textContent =
+      "入力ハッシュと再計算結果を照合し、記録を再開しました。確認者や日時の真正性は保証しません。";
+    el("message").className = "notice";
+  } catch (error) {
+    showError(error);
+  } finally {
+    event.target.value = "";
+  }
+});
+el("reset").addEventListener("click", () => {
+  el("reset-panel").hidden = false;
+});
+el("reset-cancel").addEventListener("click", () => {
+  el("reset-panel").hidden = true;
+});
+el("reset-confirm").addEventListener("click", () => {
+  result = null;
+  reviews = {};
+  audit = [];
+  sources = null;
+  inputHashes = null;
+  chosen = null;
+  lock(false);
+  el("results").hidden = true;
+  el("review-form").hidden = true;
+  el("rows").replaceChildren();
+  el("reset-panel").hidden = true;
+  el("message").textContent =
+    "入力を変更できます。前の判断を引き継ぐには保存したJSONを開いてください。";
+});
+
+    </script>
+  </body>
+</html>

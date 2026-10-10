@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>月次照合 独立確認版</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #183044;
+        --muted: #536978;
+        --accent: #146458;
+        --line: #ccd8de;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #f4f7f8;
+        color: var(--ink);
+        font:
+          16px/1.6 system-ui,
+          "Yu Gothic",
+          sans-serif;
+      }
+      main {
+        max-width: 1200px;
+        margin: auto;
+        padding: 28px 24px 64px;
+      }
+      header {
+        border-left: 5px solid var(--accent);
+        padding: 0 0 0 20px;
+        margin-bottom: 24px;
+      }
+      h1 {
+        font-size: 30px;
+        line-height: 1.35;
+        margin: 8px 0;
+      }
+      h2 {
+        font-size: 22px;
+      }
+      h3 {
+        font-size: 18px;
+      }
+      .tag {
+        font-size: 13px;
+        color: var(--muted);
+        letter-spacing: 0.08em;
+      }
+      .card {
+        background: white;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+        margin: 20px 0;
+      }
+      .inputs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      label {
+        display: block;
+        font-weight: 600;
+        margin: 12px 0 5px;
+      }
+      input,
+      textarea,
+      select,
+      button {
+        font: inherit;
+      }
+      input[type="text"],
+      input[type="month"],
+      textarea,
+      select {
+        border: 1px solid #879caa;
+        border-radius: 6px;
+        padding: 9px;
+        width: 100%;
+        background: white;
+        color: var(--ink);
+      }
+      textarea {
+        height: 190px;
+        font:
+          13px/1.5 ui-monospace,
+          monospace;
+        resize: vertical;
+      }
+      input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
+        vertical-align: middle;
+        margin-right: 7px;
+      }
+      button {
+        border: 1px solid var(--accent);
+        background: var(--accent);
+        color: white;
+        border-radius: 6px;
+        padding: 10px 16px;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: white;
+        color: var(--accent);
+      }
+      button:disabled {
+        opacity: 0.45;
+        cursor: default;
+      }
+      button:focus-visible,
+      a:focus-visible,
+      input:focus-visible,
+      textarea:focus-visible,
+      select:focus-visible {
+        outline: 3px solid #c27514;
+        outline-offset: 3px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-top: 20px;
+      }
+      .notice {
+        padding: 16px;
+        background: #e6f2ee;
+        border-left: 4px solid var(--accent);
+      }
+      .error {
+        background: #fff0ee;
+        border-color: #ad3225;
+      }
+      .small {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      .table-wrap {
+        max-height: 500px;
+        overflow: auto;
+        border: 1px solid var(--line);
+      }
+      table {
+        border-collapse: collapse;
+        min-width: 1020px;
+        width: 100%;
+        font-size: 14px;
+      }
+      th,
+      td {
+        padding: 10px;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+        overflow-wrap: anywhere;
+        max-width: 210px;
+      }
+      th {
+        position: sticky;
+        top: 0;
+        background: #eaf0f3;
+        z-index: 1;
+      }
+      .attention {
+        background: #fff9ed;
+      }
+      td button {
+        padding: 5px 9px;
+      }
+      .guide {
+        background: #edf7f3;
+        border: 1px solid #92b8aa;
+        border-radius: 10px;
+        padding: 20px;
+        margin: 16px 0;
+      }
+      .pair-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin: 16px 0;
+      }
+      .pair-card {
+        border: 1px solid var(--line);
+        border-radius: 8px;
+        padding: 16px;
+        background: #f8fafb;
+      }
+      .pair-card h3 {
+        margin-top: 0;
+      }
+      .pair-card dl {
+        margin: 0;
+        display: grid;
+        grid-template-columns: 90px 1fr;
+        gap: 8px;
+      }
+      .pair-card dt {
+        font-weight: 600;
+      }
+      .pair-card dd {
+        margin: 0;
+        overflow-wrap: anywhere;
+      }
+      button:focus-visible,
+      input:focus-visible,
+      select:focus-visible,
+      textarea:focus-visible {
+        outline: 3px solid #b35d10;
+        outline-offset: 3px;
+      }
+      .editor {
+        border: 2px solid var(--accent);
+      }
+      [hidden] {
+        display: none !important;
+      }
+      .inline {
+        max-width: 230px;
+      }
+      footer {
+        font-size: 14px;
+        color: var(--muted);
+      }
+      @media (max-width: 680px) {
+        main {
+          padding: 20px 14px 40px;
+        }
+        .pair-grid {
+          grid-template-columns: 1fr;
+        }
+        .inputs {
+          grid-template-columns: 1fr;
+        }
+        .card {
+          padding: 16px;
+        }
+        h1 {
+          font-size: 25px;
+        }
+        button {
+          min-height: 44px;
+        }
+        .actions button {
+          flex-grow: 1;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="tag">星野宇潮 · 非公開の操作確認版 · guided.1</div>
+        <h1>帳簿と請求一覧を照合し、<br />確認の記録を残す</h1>
+        <p>
+          同じ日付・相手先・金額で、一意な1対1の候補を探します。入力と計算はこの端末内で行います。
+        </p>
+      </header>
+      <p class="notice">
+        候補は人による確認前です。未解決が残る状態を全件完了にしません。この確認版で、月次決算・申告・監査判断の完了を判定することはできません。
+      </p>
+      <section class="card">
+        <h2>1 対象月とCSVを入れる</h2>
+        <p>
+          UTF-8のCSVを選ぶか貼り付けてください。標準6列、または「日付,相手先,金額」の3列に対応します。1ファイル300行・1MBまでです。
+        </p>
+        <label for="period">対象月</label
+        ><input class="inline" id="period" type="month" value="2026-09" />
+        <label
+          ><input type="checkbox" id="aliases" />株式会社と㈱・(株)の先頭表記を同一視する</label
+        >
+        <p class="small">
+          同じ法人であることは原資料で確認してください。略称や内部の空白から別の法人を同一とは推定しません。
+        </p>
+        <div class="inputs">
+          <div>
+            <h3>帳簿</h3>
+            <label for="ledger-file">帳簿CSVを選択</label
+            ><input id="ledger-file" type="file" accept=".csv,text/csv" /><label for="ledger-name"
+              >元ファイル名</label
+            ><input id="ledger-name" type="text" value="ledger.csv" /><label for="ledger"
+              >帳簿CSVの内容</label
+            ><textarea id="ledger" spellcheck="false"></textarea>
+          </div>
+          <div>
+            <h3>請求一覧</h3>
+            <label for="invoices-file">請求CSVを選択</label
+            ><input id="invoices-file" type="file" accept=".csv,text/csv" /><label
+              for="invoices-name"
+              >元ファイル名</label
+            ><input id="invoices-name" type="text" value="invoices.csv" /><label for="invoices"
+              >請求CSVの内容</label
+            ><textarea id="invoices" spellcheck="false"></textarea>
+          </div>
+        </div>
+        <div class="actions">
+          <button id="run" type="button">候補を作成する</button
+          ><button id="demo" class="secondary" type="button">架空データで試す</button
+          ><button id="reset" class="secondary" type="button" disabled>
+            保存して入力を変更する
+          </button>
+        </div>
+        <div id="reset-panel" class="notice" hidden>
+          <p>
+            保存していない判断は失われます。必要なJSONとCSVを保存してから、入力変更へ進んでください。
+          </p>
+          <div class="actions">
+            <button id="reset-confirm" type="button">保存済み 入力変更へ進む</button
+            ><button id="reset-cancel" class="secondary" type="button">記録へ戻る</button>
+          </div>
+        </div>
+        <details>
+          <summary>保存した記録を再開する</summary>
+          <p>
+            この版が出力したJSONを読み込みます。入力ハッシュと候補を再計算し、判断履歴の整合を確認します。
+          </p>
+          <label for="resume">再開するJSON</label
+          ><input id="resume" type="file" accept=".json,application/json" />
+        </details>
+      </section>
+      <p id="message" class="notice" role="status" aria-live="polite">
+        架空データから操作を確認できます。外部への送信機能はありません。
+      </p>
+      <section id="results" class="card" hidden>
+        <h2>2 元の行と候補を確認する</h2>
+        <p id="counts"></p>
+        <p id="progress" role="status" aria-live="polite"></p>
+        <div class="guide" aria-labelledby="guide-title">
+          <h3 id="guide-title">まず1組、確認して保存する</h3>
+          <p id="next-step" role="status" aria-live="polite"></p>
+          <label for="reviewer">1 確認者IDを入力</label
+          ><input
+            id="reviewer"
+            class="inline"
+            type="text"
+            placeholder="起動確認なら OPERATOR"
+            maxlength="64"
+          />
+          <p class="small">
+            起動確認では OPERATOR と入力してください。自動では判断を記録しません。
+          </p>
+          <button id="open-first" type="button">2 未記入の候補を1組確認する</button>
+        </div>
+        <form id="review-form" class="card editor" hidden>
+          <h3>帳簿と請求を見比べて、判断を記録する</h3>
+          <p id="selected"></p>
+          <p id="basis"></p>
+          <div id="pair-details" class="pair-grid"></div>
+          <p>日付・相手先・金額と元の行を両側で確認してください。判断は自分で選びます。</p>
+          <label for="decision">判断</label
+          ><select id="decision" required>
+            <option value="" disabled>判断を選んでください</option>
+            <option value="pending">未解決</option>
+            <option value="accepted">この候補を採用する</option>
+            <option value="rejected">候補を使わない</option></select
+          ><label for="reason">判断理由 または不足している資料</label
+          ><textarea id="reason" required></textarea>
+          <p class="small">
+            候補を採用すると両側に同じ確認者・日時・理由を記録します。要確認・片側のみの行は採用できません。訂正が必要な行は未解決として訂正案を残してください。
+          </p>
+          <label
+            ><input
+              id="pair-confirm"
+              type="checkbox"
+            />候補の両側の日付・相手先・金額と元行を確認した</label
+          >
+          <p class="small">
+            「この候補を採用する」を選ぶ場合は、上の確認にチェックしてください。未解決や候補不採用の場合は不要です。
+          </p>
+          <button type="submit">この判断を記録する</button>
+          <button id="review-cancel" class="secondary" type="button">記録せずに閉じる</button>
+        </form>
+        <h3>3 判断を記録したら、2つのファイルを保存する</h3>
+        <div class="actions">
+          <button id="save-json" type="button" disabled>① JSONを保存（再開用）</button
+          ><button id="save-csv" class="secondary" type="button" disabled>
+            ② CSVを保存（確認表）
+          </button>
+        </div>
+        <p class="small">
+          JSONには元の入力データが含まれます。保存先の共有設定を確認してください。確認表CSVは数式として解釈される文字列の先頭にアポストロフィを付けます。
+        </p>
+        <p id="save-status" role="status" aria-live="polite"></p>
+        <details>
+          <summary>保存したJSONを再開する方法</summary>
+          <p>
+            このHTMLを別のタブで開き、上の「保存した記録を再開する」から保存したJSONを選びます。記入と未解決の件数が同じか確認してください。
+          </p>
+        </details>
+        <h3>全行の一覧</h3>
+
+        <label for="filter">表示する行</label
+        ><select id="filter" class="inline">
+          <option value="all">全行</option>
+          <option value="pending">未記入・未解決のみ</option>
+        </select>
+        <p id="shown" class="small"></p>
+        <div class="table-wrap" tabindex="0" aria-label="照合候補の全入力行">
+          <table>
+            <thead>
+              <tr>
+                <th>資料</th>
+                <th>行ID</th>
+                <th>元の行</th>
+                <th>日付</th>
+                <th>相手先</th>
+                <th>金額 円</th>
+                <th>分類</th>
+                <th>相手行</th>
+                <th>人の判断</th>
+                <th>操作</th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+        <details>
+          <summary>未記入の照合候補をまとめて記録する</summary>
+          <p>
+            各候補の両側を実際に確認した場合だけ使ってください。要確認・片側のみの行と、すでに判断を記入した候補は変更しません。
+          </p>
+          <label for="bulk-reason">共通の確認根拠</label><textarea id="bulk-reason"></textarea
+          ><label
+            ><input
+              id="bulk-confirm"
+              type="checkbox"
+            />未記入候補の両側の日付・相手先・金額と元行を確認した</label
+          ><button id="bulk-save" type="button">確認した未記入候補を記録する</button>
+        </details>
+      </section>
+      <footer>
+        <p>
+          入力ハッシュは入力の一致を確かめるための値です。証拠の真正性、確認者や日時の認証を保証するものではありません。
+        </p>
+        <p>
+          使い方と試験条件は同梱のREADME.mdを参照してください。問い合わせは試験担当者へ伝えてください。
+        </p>
+      </footer>
+    </main>
+    <script>
+      /*__CORE__*/
+    </script>
+    <script>
+      const SYNTHETIC_DEMO = /*__DEMO__*/;
+    </script>
+    <script>
+      /*__APP__*/
+    </script>
+  </body>
+</html>
