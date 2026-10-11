@@ -6,6 +6,8 @@
 
 [確認版をダウンロード](https://github.com/USHIKUNDESUYO/monthly-reconcile/releases/tag/v0.1.0-preview.20261011-guided.3)
 
+CSVの照合と調書の下書きのどちらから始めるかは、[月次照合とYUHITSUの使い分け・再現ガイド](GUIDE.md)で確認できます。
+
 ## 最初の1組を確認して保存する
 
 1. ZIPを展開し、`monthly-reconcile.html`を開きます。
