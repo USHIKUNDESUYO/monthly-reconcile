@@ -258,7 +258,7 @@
   <body>
     <main>
       <header>
-        <div class="tag">星野宇潮 · 操作確認版 · guided.2</div>
+        <div class="tag">星野宇潮 · 操作確認版 · guided.3</div>
         <h1>帳簿と請求一覧を照合し、<br />確認の記録を残す</h1>
         <p>
           同じ日付・相手先・金額で、一意な1対1の候補を探します。入力と計算はこの端末内で行います。
@@ -927,6 +927,12 @@ function lock(locked) {
     el(id).disabled = locked;
   for (const id of ["save-json", "save-csv", "reset"]) el(id).disabled = !locked;
 }
+function syncControls() {
+  lock(processing || Boolean(result));
+  for (const id of ["save-json", "save-csv", "reset"])
+    el(id).disabled = processing || !result;
+  el("resume").disabled = processing;
+}
 function render() {
   const s = core.summary(result, reviews);
   el("counts").textContent =
@@ -1078,9 +1084,10 @@ function download(name, text, type, kind) {
   renderGuide();
 }
 async function run() {
+  if (result || processing) return;
   try {
     processing = true;
-    el("run").disabled = true;
+    syncControls();
     const input = {
       ledger: { text: el("ledger").value, name: el("ledger-name").value },
       invoices: { text: el("invoices").value, name: el("invoices-name").value },
@@ -1094,7 +1101,6 @@ async function run() {
       core.readInput(input.invoices.text, "invoices", input.invoices.name),
       options,
     );
-    lock(true);
     const hashes = {
       ledger: await hash(input.ledger.text),
       invoices: await hash(input.invoices.text),
@@ -1114,14 +1120,15 @@ async function run() {
     el("results").scrollIntoView({ behavior: "smooth", block: "start" });
     el("reviewer").focus({ preventScroll: true });
   } catch (error) {
-    if (!result) lock(false);
     showError(error);
   } finally {
     processing = false;
+    syncControls();
   }
 }
 el("run").addEventListener("click", run);
 el("demo").addEventListener("click", async () => {
+  if (result || processing) return;
   el("ledger").value = SYNTHETIC_DEMO.ledger;
   el("invoices").value = SYNTHETIC_DEMO.invoices;
   el("ledger-name").value = "ledger-standard.csv";
@@ -1146,19 +1153,29 @@ el("review-cancel").addEventListener("click", () => {
 });
 for (const side of ["ledger", "invoices"])
   el(`${side}-file`).addEventListener("change", async (event) => {
+    let started = false;
     try {
       const file = event.target.files[0];
       if (!file) return;
-      if (file.size > 1000000) throw Error("CSVは1MB以内にしてください。");
-      const bytes = await file.arrayBuffer();
       if (result || processing)
         throw Error("処理を終え、先に保存して入力を変更するボタンを押してください。");
+      processing = true;
+      started = true;
+      syncControls();
+      if (file.size > 1000000) throw Error("CSVは1MB以内にしてください。");
+      const bytes = await file.arrayBuffer();
       const text = new TextDecoder("utf-8", { fatal: true, ignoreBOM: true }).decode(bytes);
       el(side).value = text;
       el(`${side}-name`).value = file.name;
       el("message").textContent = "CSVを端末内で読み込みました。対象月を確認してください。";
     } catch (error) {
       showError(error);
+    } finally {
+      if (started) {
+        processing = false;
+        syncControls();
+      }
+      event.target.value = "";
     }
   });
 el("review-form").addEventListener("submit", (event) => {
@@ -1258,10 +1275,7 @@ el("resume").addEventListener("change", async (event) => {
       throw Error("処理を終え、先に保存し、入力を変更するボタンを押してください。");
     processing = true;
     started = true;
-    for (const id of [
-      "demo", "run", "ledger", "invoices", "ledger-name", "invoices-name",
-      "period", "aliases", "ledger-file", "invoices-file", "resume",
-    ]) el(id).disabled = true;
+    syncControls();
     if (file.size > 4000000) throw Error("再開ファイルは4MB以内にしてください。");
     const saved = JSON.parse(await file.text());
     if (
@@ -1305,7 +1319,6 @@ el("resume").addEventListener("change", async (event) => {
     }
     el("period").value = result.options.period;
     el("aliases").checked = result.options.corporateAliases;
-    lock(true);
     el("results").hidden = false;
     el("review-form").hidden = true;
     render();
@@ -1318,26 +1331,28 @@ el("resume").addEventListener("change", async (event) => {
   } finally {
     if (started) {
       processing = false;
-      el("resume").disabled = false;
-      if (!result) lock(false);
+      syncControls();
     }
     event.target.value = "";
   }
 });
 el("reset").addEventListener("click", () => {
+  if (processing || !result) return;
   el("reset-panel").hidden = false;
 });
 el("reset-cancel").addEventListener("click", () => {
   el("reset-panel").hidden = true;
 });
 el("reset-confirm").addEventListener("click", () => {
+  if (processing || !result) return;
   result = null;
   reviews = {};
   audit = [];
   sources = null;
   inputHashes = null;
   chosen = null;
-  lock(false);
+  savedExports = { json: false, csv: false };
+  syncControls();
   el("results").hidden = true;
   el("review-form").hidden = true;
   el("rows").replaceChildren();

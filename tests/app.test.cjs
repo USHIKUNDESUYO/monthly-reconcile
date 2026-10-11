@@ -20,7 +20,7 @@ const demo = Object.fromEntries(
 );
 
 // Event/DOM harness checks application state; it is not a browser or visual test.
-function harness() {
+function harness(cryptoProvider = webcrypto) {
   const ids = new Map(),
     downloads = [],
     blobs = new Map();
@@ -98,7 +98,7 @@ function harness() {
     MonthlyReconcile: core,
     SYNTHETIC_DEMO: demo,
     document,
-    crypto: webcrypto,
+    crypto: cryptoProvider,
     TextEncoder,
     TextDecoder,
     Blob,
@@ -313,4 +313,80 @@ test("invalid resumed JSON releases controls and permits another valid import", 
   await h.e("resume").dispatch("change");
   assert.equal(h.snapshot().summary.recorded_rows, 2);
   assert.equal(h.snapshot().audit.length, 1);
+});
+
+
+test("CSV reading disables competing edits and a second queued selection", async () => {
+  const h = harness();
+  let finish;
+  const first = new Promise((resolve) => { finish = resolve; });
+  h.e("ledger-file").files = [{ size: 5, name: "first.csv", arrayBuffer: () => first }];
+  const running = h.e("ledger-file").dispatch("change");
+  const locked = ["ledger-file", "ledger", "demo", "resume"].map((id) => h.e(id).disabled);
+  const later = { size: 6, name: "later.csv", arrayBuffer: async () => Buffer.from("later") };
+  h.e("ledger-file").files = [later];
+  await h.e("ledger-file").listeners.get("change")({ target: h.e("ledger-file") });
+  const stillLocked = h.e("ledger-file").disabled;
+  finish(Buffer.from("first"));
+  await running;
+  assert.equal(h.e("ledger").value, "first");
+  assert.equal(h.e("ledger-name").value, "first.csv");
+  assert.deepEqual(locked, [true, true, true, true]);
+  assert.equal(stillLocked, true);
+  assert.equal(h.e("ledger-file").disabled, false);
+  assert.equal(h.e("ledger-file").value, "");
+});
+
+test("failed CSV reading unlocks controls and allows the same file to be retried", async () => {
+  const h = harness();
+  h.e("ledger").value = "keep";
+  h.e("ledger-file").value = "same.csv";
+  h.e("ledger-file").files = [{ size: 1, name: "same.csv", arrayBuffer: async () => Buffer.from([255]) }];
+  await h.e("ledger-file").dispatch("change");
+  assert.equal(h.e("ledger").value, "keep");
+  assert.equal(h.e("ledger-file").value, "");
+  assert.equal(h.e("run").disabled, false);
+  assert.equal(h.e("resume").disabled, false);
+  h.e("ledger-file").files = [{ size: 2, name: "same.csv", arrayBuffer: async () => Buffer.from("ok") }];
+  await h.e("ledger-file").dispatch("change");
+  assert.equal(h.e("ledger").value, "ok");
+});
+
+test("pending input hashes keep reset and exports disabled until a result exists", async () => {
+  let finish;
+  const first = new Promise((resolve) => { finish = resolve; });
+  let calls = 0;
+  const cryptoProvider = { subtle: { digest: async (...args) => {
+    if (++calls === 1) await first;
+    return webcrypto.subtle.digest(...args);
+  } } };
+  const h = harness(cryptoProvider);
+  const running = h.e("demo").dispatch("click");
+  assert.equal(h.e("reset").disabled, true);
+  assert.equal(h.e("save-json").disabled, true);
+  assert.equal(h.e("save-csv").disabled, true);
+  assert.equal(h.e("resume").disabled, true);
+  await h.e("reset").dispatch("click");
+  assert.equal(h.e("reset-panel").hidden, true);
+  finish();
+  await running;
+  assert.equal(h.snapshot().summary.input_rows, 200);
+  assert.equal(h.e("reset").disabled, false);
+  assert.equal(h.e("save-json").disabled, false);
+});
+
+
+test("CSV import does not temporarily apply a second file while the first is pending", async () => {
+  const h = harness();
+  let finish;
+  const first = new Promise((resolve) => { finish = resolve; });
+  h.e("ledger-file").files = [{ size: 5, name: "first.csv", arrayBuffer: () => first }];
+  const running = h.e("ledger-file").dispatch("change");
+  h.e("ledger-file").files = [{ size: 6, name: "later.csv", arrayBuffer: async () => Buffer.from("later") }];
+  await h.e("ledger-file").dispatch("change");
+  const interim = h.e("ledger").value;
+  finish(Buffer.from("first"));
+  await running;
+  assert.equal(interim, "", "a competing selection was applied before the first read completed");
+  assert.equal(h.e("ledger").value, "first");
 });
