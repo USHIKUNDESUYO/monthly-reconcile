@@ -18,7 +18,7 @@ Get-FileHash -Algorithm SHA256 dist/monthly-reconcile.html
 既存のNode.jsがある場合は、次のコマンドで判定と保存の試験を実行できます。追加パッケージを使わず、Node.jsの組み込み機能だけで動きます。
 
 ```powershell
-node --test tests/core.test.cjs
+node --test tests/core.test.cjs tests/app.test.cjs
 ```
 
 `fixtures`のCSVと期待分類は架空の試験例です。試験で比較する期待分類は、一般の会計判断や実務の正解を保証するものではありません。試験の合格と、ブラウザーの操作・組織での運用条件の確認は別の作業です。

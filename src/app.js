@@ -361,11 +361,18 @@ el("save-json").addEventListener("click", () => {
   }
 });
 el("resume").addEventListener("change", async (event) => {
+  let started = false;
   try {
     const file = event.target.files[0];
     if (!file) return;
     if (result || processing)
       throw Error("処理を終え、先に保存し、入力を変更するボタンを押してください。");
+    processing = true;
+    started = true;
+    for (const id of [
+      "demo", "run", "ledger", "invoices", "ledger-name", "invoices-name",
+      "period", "aliases", "ledger-file", "invoices-file", "resume",
+    ]) el(id).disabled = true;
     if (file.size > 4000000) throw Error("再開ファイルは4MB以内にしてください。");
     const saved = JSON.parse(await file.text());
     if (
@@ -420,6 +427,11 @@ el("resume").addEventListener("change", async (event) => {
   } catch (error) {
     showError(error);
   } finally {
+    if (started) {
+      processing = false;
+      el("resume").disabled = false;
+      if (!result) lock(false);
+    }
     event.target.value = "";
   }
 });

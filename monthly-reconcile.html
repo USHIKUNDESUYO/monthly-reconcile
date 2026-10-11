@@ -258,7 +258,7 @@
   <body>
     <main>
       <header>
-        <div class="tag">星野宇潮 · 非公開の操作確認版 · guided.1</div>
+        <div class="tag">星野宇潮 · 操作確認版 · guided.2</div>
         <h1>帳簿と請求一覧を照合し、<br />確認の記録を残す</h1>
         <p>
           同じ日付・相手先・金額で、一意な1対1の候補を探します。入力と計算はこの端末内で行います。
@@ -1250,11 +1250,18 @@ el("save-json").addEventListener("click", () => {
   }
 });
 el("resume").addEventListener("change", async (event) => {
+  let started = false;
   try {
     const file = event.target.files[0];
     if (!file) return;
     if (result || processing)
       throw Error("処理を終え、先に保存し、入力を変更するボタンを押してください。");
+    processing = true;
+    started = true;
+    for (const id of [
+      "demo", "run", "ledger", "invoices", "ledger-name", "invoices-name",
+      "period", "aliases", "ledger-file", "invoices-file", "resume",
+    ]) el(id).disabled = true;
     if (file.size > 4000000) throw Error("再開ファイルは4MB以内にしてください。");
     const saved = JSON.parse(await file.text());
     if (
@@ -1309,6 +1316,11 @@ el("resume").addEventListener("change", async (event) => {
   } catch (error) {
     showError(error);
   } finally {
+    if (started) {
+      processing = false;
+      el("resume").disabled = false;
+      if (!result) lock(false);
+    }
     event.target.value = "";
   }
 });
