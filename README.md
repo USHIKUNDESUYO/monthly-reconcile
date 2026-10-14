@@ -4,11 +4,13 @@
 
 ブラウザー内で処理する構成で、サーバー、AI、OCR、外部ライブラリを必要としません。同梱のHTMLをChromeまたはEdgeで開いて使います。最初は架空データで操作を確かめてください。
 
-[確認版をダウンロード](https://github.com/USHIKUNDESUYO/monthly-reconcile/releases/tag/v0.1.0-preview.20261011-guided.3)
+[案内同梱の確認版をダウンロード](https://github.com/USHIKUNDESUYO/monthly-reconcile/releases/tag/v0.1.0-preview.20261014-guides.1)
 
 CSVの照合と調書の下書きのどちらから始めるかは、[月次照合とYUHITSUの使い分け・再現ガイド](GUIDE.md)で確認できます。
 
 初めての方は[最初の1組を確認し、保存した記録を開き直す](START.md)へ進んでください。[同じ月の続きと翌月の始め方](NEXT_MONTH.md)、[利用後の任意の確認票](USAGE_REPORT.md)も用意しています。
+
+今回の配布セットは、初回操作・翌月利用・利用確認票・CSV準備・事例記録の案内を同梱しています。ZIPを展開したら「はじめに.txt」を開くと、追加アプリを使わず案内を読めます。画面と照合処理はguided.3と同じです。自分の資料を入れる前に[CSVの準備](PREPARE_CSV.md)を確認し、成果の整理には[事例記録のひな形](CASE_REPORT.md)を使えます。
 
 ## 最初の1組を確認して保存する
 

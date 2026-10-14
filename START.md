@@ -4,7 +4,7 @@
 
 ## 画面を開いて架空データを入れる
 
-[月次照合の確認版guided.3](https://github.com/USHIKUNDESUYO/monthly-reconcile/releases/tag/v0.1.0-preview.20261011-guided.3)のZIPを保存し、右クリックして「すべて展開」を選びます。展開したフォルダーのmonthly-reconcile.htmlをChromeまたはEdgeで開いてください。サーバーや追加アプリの導入は不要です。
+[月次照合の案内同梱版](https://github.com/USHIKUNDESUYO/monthly-reconcile/releases/tag/v0.1.0-preview.20261014-guides.1)のZIPを保存し、右クリックして「すべて展開」を選びます。展開したフォルダーのmonthly-reconcile.htmlをChromeまたはEdgeで開いてください。サーバーや追加アプリの導入は不要です。
 
 「架空データで試す」を押すと、2026年9月の帳簿100行と請求100行を比較します。入力は200行、照合候補は80組です。残る行も画面の一覧へ表示されます。確認者IDにはA01など、自分で決めた識別用の文字を入力してください。氏名は不要です。
 
